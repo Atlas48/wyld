@@ -19,7 +19,6 @@ layout: basic.pug
 	3. **Active Waylays** (5 cards): The waylays that will be active during the current story.
 
 # Play
-## Start
 - Upon game start...
 	- 8 cards are dealt to each player.
 - Every 6 sessions...
