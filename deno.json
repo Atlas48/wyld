@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@std/yaml": "jsr:@std/yaml@^1.0.11",
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.4/",
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts"
   },
