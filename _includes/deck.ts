@@ -1,5 +1,5 @@
-export default (data: Lume.Data) => {
-  const pages = data.search.pages(`type=${data.deckType}`);
+export default function(data: Lume.Data) {
+  const pages = data.search.pages(`type=${data.deckType} test!=true`).filter((p: Lume.Data) => !p.url.match(/\/test-[^/]+$/));
   const cards = pages.map((page: Lume.Data, i: number) => ({
     name: page.title,
     type: "base",
@@ -7,7 +7,11 @@ export default (data: Lume.Data) => {
     system: {},
     suit: data.deckType,
     value: page.xp ?? null,
-    back: { name: "", text: "", img: "" },
+    back: {
+		name: "Wyld Card",
+		text: "",
+		img: ""
+	},
     faces: [{ name: page.title, img: `/${data.deckType}/${page.url.replace(/.*\//, '').replace(/\.[^.]+$/, '')}.svg`, text: "" }],
     face: null,
     drawn: false,
