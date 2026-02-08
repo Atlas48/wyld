@@ -2,6 +2,7 @@
 title: Test Boon
 img:
 perpetual: false
-test: true
+url: /card/boon/test-boon.svg
+layout: card.pug
 ---
 Test boon card.

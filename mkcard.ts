@@ -27,14 +27,17 @@ if (args._.length!==2) {
 }
 var content="";
 const d=new TextDecoder;
+const id=slugify(Deno.args[1],slugconf)
 const stat=await Deno.permissions.query({name:"write",path:"./card"});
 if (stat.state!=="granted") {
-	console.error("Unable to write to cards directory, permission not granted")
+	console.error("Unable to write to cards directory, permission not granted.")
 	Deno.exit(1)
 }
 const outf:any={
 	title:args._[1],
-	img: args.image
+	img: args.image,
+	url: `/card/${Deno.args[0]}/${id}.svg`,
+	layout: "card.pug"
 }
 switch(Deno.args[0]) {
 	case "story": outf.xp=args.xp; break;
@@ -48,4 +51,4 @@ content+="---\n";
 content+=stringify(outf);
 content+="---\n";
 if(!Deno.stdin.isTerminal()) for await (const i of Deno.stdin.readable) content+=d.decode(i);
-await Deno.writeTextFile(`./card/${Deno.args[0]}/${slugify(Deno.args[1],slugconf)}.md`,content);
+await Deno.writeTextFile(`./card/${Deno.args[0]}/${id}.md`,content);
