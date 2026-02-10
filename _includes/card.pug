@@ -1,20 +1,28 @@
 doctype xml
-svg(width=100 height=140 xmlns="http://www.w3.org/2000/svg")
+- var background='#'
+match type
+	when 0 //story
+		- background+='00BF00'
+	when 1 //boon
+		- background+='0000BF'
+	when 2 //waylay
+		- background+='BF0000'
+svg(width=200 height=280 xmlns="http://www.w3.org/2000/svg")
 	defs
 		clipPath(id="imgclip")
-			rect(x=8 y=20 width=84 height=60 rx=2)
-	rect(width=100 height=140 fill="#1a1a1a" rx=4)
+			rect(x=16 y=40 width=168 height=120 rx=4)
+	rect(width=200 height=280 fill=background rx=8)
 
-	rect(x=2 y=2 width=96 height=136 fill="none" stroke="#d4af37" stroke-width=2 rx=3)
+	rect(x=4 y=4 width=192 height=272 fill="none" stroke="#D4AF37" stroke-width=4 rx=6)
 
-	image(href=img x=8 y=20 width=84 height=60 clip-path="url(#image-clip)")
+	image(href=img||id+".svg" x=16 y=40 width=168 height=120 clip-path="url(#image-clip)")
 
-	rect(x=6 y=85 width=88 height=18 fill="#1a1a1a" stroke="#d4af37" stroke-width=1)
-	text(x=50 y=97 font-family="serif" font-size=9 fill="#fff" text-anchor="middle" font-weight="bold")=title
+	rect(x=12 y=170 width=176 height=36 fill=background stroke="#d4af37" stroke-width=2)
+	text(x=100 y=194 font-family="serif" font-size=18 fill="#FFF" text-anchor="middle" font-weight="bold")=title
 
-	foreignObject(x=8 y=105 width=84 height=30)
-		div(xmlns="http://www.w3.org/1999/xhtml" style="font-family: sans-serif; font-size: 6px; color: #ccc; text-align: center; line-height: 1.2;")!=content
+	foreignObject(x=16 y=210 width=168 height=60)
+		div(xmlns="http://www.w3.org/1999/xhtml" style="font-family: sans-serif; font-size: 12px; color: #CCC; text-align: center; line-height: 1.2;")!=content
 
-	circle(cx=15 cy=15 r=10 fill="#4a5899" stroke="#7792d4" stroke-width=2)
-	text(x=15 y=19 font-family="serif" font-size=12 fill="#fff" text-anchor="middle" font-weight="bold")=xp
-
+	if xp
+		circle(cx=30 cy=30 r=20 fill="#4A5899" stroke="#7792d4" stroke-width=4)
+		text(x=30 y=38 font-family="serif" font-size=24 fill="#FFF" text-anchor="middle" font-weight="bold")=xp

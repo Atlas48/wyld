@@ -5,5 +5,5 @@ perpetual: true
 url: /card/boon/lucy-arkwright.svg
 layout: card.pug
 ---
-**Summon**
+**Summon**<br/>
 A very horny helper!
