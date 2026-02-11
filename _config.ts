@@ -8,6 +8,6 @@ const conf = {
 const site = lume(conf);
 
 site.use(pug());
-site.data("layout","card.pug");
+site.add("card/img");
 
 export default site;
