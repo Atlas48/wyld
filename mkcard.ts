@@ -13,7 +13,6 @@ const apconf:argparse.Options= {
 		p: "perpetual"
 	},
 	default: {
-		image: "",
 		xp: 0,
 		perpetual: false
 	}
@@ -35,10 +34,10 @@ if (stat.state!=="granted") {
 }
 const outf:any={
 	title:args._[1],
-	img: args.image,
 	url: `/card/${Deno.args[0]}/${id}.svg`,
 	layout: "card.pug"
 }
+if(typeof args['img']!=="undefined" || args['img']!==null) outf.img=args.img;
 switch(Deno.args[0]) {
 	case "story": outf.xp=args.xp; break;
 	case "boon": outf.perpetual=args.perpetual; break;
