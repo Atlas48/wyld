@@ -19,12 +19,12 @@ layout: basic.pug
 	3. **Active Waylays** (5 cards): The waylays that will be active during the current story.
 
 # Play
-- Upon game start...
-	- 8 cards are dealt to each player.
+- Upon chronicle start...
+	- 8 story cards are dealt to each player.
 - Every 6 sessions...
 	- Each player takes a turn to add a single story card to the episode list.
 	- The ST may choose to add their own special card to the episode list.
-	- If this isn't the first session, a single card is dealt to each player.
+	- If this isn't chronicle start, a single card is dealt to each player.
 - At the start of each session...
 	- The players play up to 3 boon cards.
 	- The ST plays up to the current episode card's XP reward in Waylay cards.
