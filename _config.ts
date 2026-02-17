@@ -1,14 +1,6 @@
 import lume from "lume/mod.ts";
 import pug from "lume/plugins/pug.ts";
-import deflist from "npm:markdown-it-deflist";
-
-const conf = {
-	prettyUrls: false
-};
-
-const mdconf = {
-	plugins: [deflist]
-}
+import {conf,mdconf} from './lib.ts';
 
 const site = lume(conf);
 
