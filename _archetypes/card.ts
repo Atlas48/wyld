@@ -1,21 +1,31 @@
 import {slugify} from "https://deno.land/x/slugify/mod.ts";
+import argparse from "https://github.com/denoboot/argparse/raw/refs/heads/main/src/mod.ts";
 
-export default function card(type:string, title:string, text:string, special:string) {
-	const base=`/card/${type}/${slugify(title,{lower:true})}.`;
+const apconf: argparse.Options = {
+	alias: {
+		i: "image",
+		x: "xp",
+		s: "special"
+	},
+	default: {
+		xp: 0,
+		special: false
+	}
+}
+
+export default function card() {
+	const args=argparse(arguments,apconf);
+	const base=`/card/${args._[0]}/${slugify(args._[1],{lower:true})}.`;
 	var out = {
 		path: base+'md',
 		content: {
+			title: args._[1],
 			layout: "card.pug",
 			url: base+'svg',
-			content: text
+			special: args.special,
+			content: args._[2]??""
 		}
 	}
-	switch(type) {
-		case "boon": out.content.perpetual=(typeof special !== "undefined" && special!==null) && (special[0]==="t" || special[0]==="y"); break;
-		case "waylay": break; //nothing special to add!
-		case "story": out.content.xp=parseInt(special); break;
-		default:
-			console.error("Please provide either 'boon', 'waylay', or 'story' as options")
-			return undefined;
-	} return out;
+	if(args._[0]=="story") out.content.xp=args.xp;
+	return out;
 }
