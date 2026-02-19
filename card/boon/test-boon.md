@@ -1,8 +1,8 @@
 ---
 title: Test Boon
-img: ../img/test.png
-perpetual: false
+layout:
 url: /card/boon/test-boon.svg
-layout: card.pug
+img: test.png
+special: false
 ---
 Test boon card.
