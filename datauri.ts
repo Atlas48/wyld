@@ -17,6 +17,6 @@ export default async function datauri(fn:string): Promise<string> {
 	if(!(await exists('card/img/'+fn))) return '';
 	const fd=Deno.readFile('card/img/'+fn);
 	const en=extname(fn);
-	if(en==='.svg') return `data:image/svg+xml,${encodeURIComponent(td.decode(await data))}`
+	if(en==='.svg') return `data:image/svg+xml,${encodeURIComponent(td.decode(await fd))}`
 	else return `data:${qlookup(en)};base64,${encodeBase64(await fd)}`
 }

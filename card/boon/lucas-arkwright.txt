@@ -4,6 +4,6 @@ layout: card.pug
 url: /card/boon/lucas-arkwright.svg
 img: lucas-arkwright.jpg
 special: true
+desc: Summon
 ---
-**Summon**<br/>
 Back, and even more a loverboy!
