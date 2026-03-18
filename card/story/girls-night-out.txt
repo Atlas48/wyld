@@ -1,0 +1,7 @@
+---
+title: Girls' Night Out
+layout: card.pug
+url: /card/story/girls-night-out.svg
+special: false
+---
+Ari gets a dumb idea involving volfem.

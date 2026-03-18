@@ -1,0 +1,7 @@
+---
+title: 'Mushroom, Mushroom!'
+layout: card.pug
+url: /card/story/mushroom-mushroom.svg
+special: false
+---
+Ari suggests going mushrooming!

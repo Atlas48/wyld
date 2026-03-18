@@ -1,0 +1,7 @@
+---
+title: Actual Ghost Hunt
+layout: card.pug
+url: /card/story/actual-ghost-hunt.svg
+special: false
+---
+Ari wants to go on a ghost hunt with everyone!

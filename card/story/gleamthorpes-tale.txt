@@ -1,0 +1,7 @@
+---
+title: Gleamthorpe's Tale
+layout: card.pug
+url: /card/story/gleamthorpes-tale.svg
+special: false
+---
+An apparent paradise is found in the woods.

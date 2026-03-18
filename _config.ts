@@ -13,5 +13,6 @@ const site = lume(conf,mdconf);
 site.use(pug());
 site.use(txt());
 site.preprocess(['.txt'],adduri);
+site.ignore(i=>i.match(/.*plot.*\.md/i));
 
 export default site;

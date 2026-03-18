@@ -10,10 +10,11 @@ function* _slurp(inf:string): Iterable<string> {
 	const buf=new Uint8Array(1);
 	const f=Deno.openSync(inf);
 	var out='';
-	while(f.readSync(buf)==null) {
+	while(f.readSync(buf)!=null) {
 		const c=d.decode(buf);
-		case(c) {
-			case "\r":
+		switch(c) {
+			case "\r": continue;
+			case "\n":
 				yield out;
 				out='';
 				break;
@@ -22,21 +23,23 @@ function* _slurp(inf:string): Iterable<string> {
 				break;
 		}
 	}
-	if(line) yield line;
+	if(out) yield out;
 }
 
 export default function* md2story(inf:string) {
 	for(const i of _slurp(inf)) {
-		if(i[0]!='#'&&i[1]!=' ') continue;
+		if(!i.match(/^# /)) continue;
 		const title=i.substring(2);
+		if(title.length>255) throw new TypeError(`Passed value that cannot be written: ${title}`);
 		const base=`/card/story/${slugify(title,slugopt)}.`;
+		if(Deno.existsSync(base+'txt')) continue;
 		yield {
-			path: base+'md',
+			path: base+'txt',
 			content: {
 				title,
 				layout: 'card.pug',
 				url: base+'svg',
-				special: false
+				special: false,
 				content: ''
 			}
 		}

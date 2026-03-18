@@ -1,0 +1,7 @@
+---
+title: Going on a Wolf Hunt
+layout: card.pug
+url: /card/story/going-on-a-wolf-hunt.svg
+special: false
+---
+Sightings of a Barghest have been reported, investigate!

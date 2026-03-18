@@ -1,0 +1,7 @@
+---
+title: 'The Estate, Part III'
+layout: card.pug
+url: /card/story/the-estate-part-iii.svg
+special: false
+draft: true
+---

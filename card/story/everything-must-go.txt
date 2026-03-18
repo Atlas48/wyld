@@ -1,0 +1,7 @@
+---
+title: Everything Must Go
+layout: card.pug
+url: /card/story/everything-must-go.svg
+special: false
+---
+A familiar face in a locum elegiae.

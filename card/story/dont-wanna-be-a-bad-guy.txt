@@ -1,0 +1,7 @@
+---
+title: Don't Wanna Be a Bad Guy
+layout: card.pug
+url: /card/story/dont-wanna-be-a-bad-guy.svg
+special: true
+---
+Yet another Satyr crashout.

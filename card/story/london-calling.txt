@@ -1,0 +1,7 @@
+---
+title: London Calling
+layout: card.pug
+url: /card/story/london-calling.svg
+special: false
+---
+A nice, simple, London trip.
