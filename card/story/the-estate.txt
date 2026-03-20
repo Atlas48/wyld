@@ -2,6 +2,7 @@
 title: The Estate
 layout: card.pug
 url: /card/story/the-estate.svg
+xp: 2
 special: false
 ---
 Ari investigates the greenhouse of a large house.

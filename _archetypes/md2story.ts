@@ -40,6 +40,7 @@ export default function* md2story(inf:string) {
 				layout: 'card.pug',
 				url: base+'svg',
 				special: false,
+				xp: 0,
 				content: ''
 			}
 		}
