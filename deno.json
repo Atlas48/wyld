@@ -69,5 +69,10 @@
       ]
     }
   },
-  "lock": false
+  "lock": false,
+  "allowScripts": {
+    "deny": [
+      "npm:sharp"
+    ]
+  }
 }
