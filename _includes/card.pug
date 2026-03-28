@@ -29,11 +29,15 @@ svg(width=200 height=280 xmlns="http://www.w3.org/2000/svg")
 	text(x=100 y=194 font-family="serif" font-size=18 fill="#FFF" text-anchor="middle" font-weight="bold")=title
 
 	text(x=100 y=224 font-family="sans-serif" font-size=12 fill="#313131" text-anchor="middle")
+		- let tl=content.split('\n')
 		if desc
 			tspan(x=100 font-weight="bold")=desc
-		each line in content.split('\n') 
+			tspan(x=100 dy="2em")=tl[0]
+		else
+			tspan(x=100 dy="1.2em")=tl[0]
+		each line in tl.slice(1) 
 			tspan(x=100 dy="1.2em")=line
 
-	if typeof xp !== "undefined" && xp !== null
+	if typeof xp !== "undefined" && xp !== null && xp!=0
 		circle(cx=30 cy=30 r=20 fill="#4A5899" stroke="#7792D4" stroke-width=4)
 		text(x=30 y=38 font-family="serif" font-size=24 fill="#AAA" text-anchor="middle" font-weight="bold")=xp
