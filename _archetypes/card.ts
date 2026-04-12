@@ -7,7 +7,7 @@ const slugopt = {
 
 export default function card(type:string,title:string,content:string) {
 	const base=`/card/${type}/${slugify(title,slugopt)}.`;
-	var out = {
+	return {
 		path: base+'md',
 		content: {
 			title,
@@ -17,5 +17,4 @@ export default function card(type:string,title:string,content:string) {
 			content
 		}
 	}
-	return out;
 }

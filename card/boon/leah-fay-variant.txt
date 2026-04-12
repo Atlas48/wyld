@@ -1,0 +1,9 @@
+---
+title: Leah Fay
+layout: card.pug
+url: /card/boon/leah-fay-variant.svg
+img: leah-fay-variant.png
+special: true
+desc: Summon
+---
+Now its your turn.

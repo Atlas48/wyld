@@ -1,0 +1,8 @@
+---
+title: Dancers in the Night
+layout: card.pug
+url: /card/story/dancers-in-the-night.svg
+xp: 1
+special: false
+---
+Will O' Wisps are spotted on the fields outside the village, investigate!
