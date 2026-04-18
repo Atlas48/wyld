@@ -14,5 +14,6 @@ site.use(pug());
 site.use(txt());
 site.preprocess(['.txt'],adduri);
 site.ignore(i=>i.match(/.*plot.*\.md/i));
+site.add("card/img");
 
 export default site;
