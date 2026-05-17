@@ -1,12 +1,8 @@
 import {slugify} from "https://deno.land/x/slugify/mod.ts";
-
-const slugopt = {
-	lower: true,
-	remove: /[!"£$%^*()\[\];'#:@~`'<>?,.\/|\\]/g
-}
+import {slugconf} from "../lib.ts";
 
 export default function card(type:string,title:string,content:string) {
-	const base=`/card/${type}/${slugify(title,slugopt)}.`;
+	const base=`/card/${type}/${slugify(title,slugconf)}.`;
 	return {
 		path: base+'md',
 		content: {

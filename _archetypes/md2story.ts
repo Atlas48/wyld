@@ -1,33 +1,16 @@
 import {slugify} from "https://deno.land/x/slugify/mod.ts";
+import {TextLineStream} from "jsr:@std/streams/text-line-stream";
 
-const slugopt = {
-	lower: true,
-	remove: /[!"£$%^*()\[\];'#:@~`'<>?,.\/|\\]/g
+async function* _slurp(inf: string): AsyncGenerator<string> {
+    const file = await Deno.open(inf);
+    const lines = file.readable
+        .pipeThrough(new TextDecoderStream())
+        .pipeThrough(new TextLineStream());
+    for await (const line of lines) yield line;
 }
 
-function* _slurp(inf:string): Iterable<string> {
-	const d=new TextDecoder;
-	const buf=new Uint8Array(1);
-	const f=Deno.openSync(inf);
-	var out='';
-	while(f.readSync(buf)!=null) {
-		const c=d.decode(buf);
-		switch(c) {
-			case "\r": continue;
-			case "\n":
-				yield out;
-				out='';
-				break;
-			default:
-				out+=c;
-				break;
-		}
-	}
-	if(out) yield out;
-}
-
-export default function* md2story(inf:string) {
-	for(const i of _slurp(inf)) {
+export default async function* md2story(inf:string) {
+	for await(const i of _slurp(inf)) {
 		if(!i.match(/^# /)) continue;
 		const title=i.substring(2);
 		if(title.length>255) throw new TypeError(`Passed value that cannot be written: ${title}`);

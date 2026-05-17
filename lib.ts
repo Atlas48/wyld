@@ -10,7 +10,7 @@ export const mdconf = {
 
 export const slugconf = {
 	lower: true,
-	remove: /[!()!"£$%^\*\\]/g
+	remove: /[!"£$%^*()\[\];'#:@~`'<>?,.\/|\\]/g
 }
 
 export function partial<T extends (...args: any[]) => any>( fn: T, ...boundArgs: any[]): (...args: any[]) => ReturnType<T> {

@@ -1,7 +1,12 @@
+# Specifics
 _site
 _cache
 .env
-*.patch
 *[Pp]lot*.md
 card/img/src
 img/src
+# Filetypes
+*.patch
+*.zip
+*.tar
+*.gz
