@@ -4,8 +4,8 @@
     "@std/fmt": "jsr:@std/fmt@^1.0.9",
     "@std/path": "jsr:@std/path@^1.1.4",
     "@std/yaml": "jsr:@std/yaml@^1.0.11",
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.2/",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/",
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.15/jsx-runtime.ts"
   },
   "permissions": {
     "lume": {
@@ -61,7 +61,7 @@
   ],
   "lint": {
     "plugins": [
-      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.2/lint.ts"
+      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/lint.ts"
     ],
     "rules": {
       "exclude": [
