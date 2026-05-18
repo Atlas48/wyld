@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
 import yaml
+from PIL import Image, ImageTk
 
 CARD_DIR = Path(__file__).parent.parent / "card"
 COLLECTIONS = ("story", "boon", "waylay")
@@ -102,14 +103,28 @@ class App(tk.Tk):
 		self.f_title = ttk.Entry(right)
 		self.f_desc  = ttk.Entry(right)
 		self.f_xp    = ttk.Spinbox(right, from_=0, to=10, width=5)
-		self.f_img   = ttk.Entry(right)
 
 		for i, (lbl, w) in enumerate(zip(
-			("Title", "Desc", "XP", "Img"),
-			(self.f_title, self.f_desc, self.f_xp, self.f_img)
+			("Title", "Desc", "XP"),
+			(self.f_title, self.f_desc, self.f_xp)
 		)):
 			ttk.Label(right, text=lbl).grid(row=i, column=0, sticky="w", padx=(0, 6))
 			w.grid(row=i, column=1, sticky="ew", pady=2)
+		ttk.Label(right, text="Img").grid(row=3, column=0, sticky="w", padx=(0, 6))
+
+		img_row = ttk.Frame(right)
+		img_row.grid(row=3, column=1, sticky="ew", pady=2)
+		img_row.columnconfigure(0, weight=1)
+		self.f_img = ttk.Entry(img_row)
+		self.f_img.grid(row=0, column=0, sticky="ew")
+		self.btn_preview = ttk.Button(img_row, text="Preview", command=self._preview_image)
+		v_img = tk.StringVar()
+		v_img.trace_add("write", lambda *_: (
+			self.btn_preview.grid(row=0, column=1, padx=(4, 0)) if v_img.get().strip()
+			else self.btn_preview.grid_remove()
+		))
+		self.f_img.config(textvariable=v_img)
+		self.btn_preview.grid_remove()
 
 		self.v_special = tk.BooleanVar()
 		ttk.Checkbutton(right, text="Special", variable=self.v_special).grid(row=4, column=1, sticky="w")
@@ -154,6 +169,23 @@ class App(tk.Tk):
 		self.f_body.delete("1.0", tk.END)
 		self.f_body.insert("1.0", data.get("content", ""))
 		self.f_body.edit_reset()
+
+	def _preview_image(self):
+		col, slug = self._current
+		if col is None:
+			return
+		data = read_card(col, slug)
+		img_path = CARD_DIR / "img" / (data.get("img") or f"{slug}.png")
+		if img_path.suffix.lower() not in (".png", ".jpg", ".jpeg") or not img_path.exists():
+			messagebox.showinfo("No image", f"No image found for {slug}.")
+			return
+		win = tk.Toplevel(self)
+		win.title(img_path.name)
+		img = Image.open(img_path)
+		photo = ImageTk.PhotoImage(img)
+		lbl = tk.Label(win, image=photo)
+		lbl.image = photo
+		lbl.pack()
 
 	def _save_card(self):
 		col, slug = self._current
