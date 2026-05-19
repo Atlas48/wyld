@@ -19,7 +19,7 @@ function compose2(f1:(i:any)=>any,f2:(i:any)=>any):(i:any)=>any {
 	return (i) => f1(f2(i));
 }
 async function* ygetcontents(dir:"img"|"boon"|"waylay"|"story"): AsyncGenerator<string> {
-	for await(const i of Deno.readDir('../card/'+dir)) {
+	for await(const i of Deno.readDir(`${Deno.env.get('WYLDROOT')}/card/${dir}`)) {
 		if(!i.isFile) continue;
 		if(!i.name.match(/\.(?:sv|pn|jpe?)g/i)||i.name.match(/test/)) continue;
 		yield i.name.replace(/\.(?:sv|pn|jpe?)g/i,'');

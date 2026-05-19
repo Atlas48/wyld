@@ -5,10 +5,20 @@ import re
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
+from os import environ as env
 import yaml
 from PIL import Image, ImageTk
 
-CARD_DIR = Path(__file__).parent.parent / "card"
+try:
+		CARD_DIR = Path(env['WYLDROOT']) / "card"
+except IndexError,KeyError:
+	from sys import stderr, exit
+	print("Please source env.sh from the repo root.",file=stderr)
+	exit(1)
+except Error as e:
+	from sys import stderr, exit
+	print("Encountered an error while attempting to get directory: ",e,file=stderr)
+	exit(1)
 COLLECTIONS = ("story", "boon", "waylay")
 
 
