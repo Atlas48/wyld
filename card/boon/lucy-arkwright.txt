@@ -1,8 +1,8 @@
 ---
-title: Lucy Arkwright
-layout: card.pug
-url: /card/boon/lucy-arkwright.svg
-special: true
 desc: Retainer
+layout: card.pug
+special: true
+title: Lucy Arkwright
+url: /card/boon/lucy-arkwright.svg
 ---
-A very horny helper!
+Don't accidentally step on her!

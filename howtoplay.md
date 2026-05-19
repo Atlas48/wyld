@@ -10,6 +10,7 @@ layout: basic.pug
 - **Waylays** are negative effects applied per session.
 - **Stories** are what you will be playing in a session.
 - Story cards have an associated XP reward.
+- Story cards may add or remove Boons and Waylays.
 - Some Boon cards are perpetual, meaning they return to hand after play.
 
 # Playfield
