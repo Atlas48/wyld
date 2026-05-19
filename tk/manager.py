@@ -56,7 +56,7 @@ def delete_card(collection: str, slug: str):
 class App(tk.Tk):
 	def __init__(self):
 		super().__init__()
-		self.title("Wyldcard")
+		self.title("Wyldcard Manager")
 		self._slugs: dict[str, list[str]] = {c: [] for c in COLLECTIONS}
 		self._current: tuple[str | None, str | None] = (None, None)
 		self._build()
