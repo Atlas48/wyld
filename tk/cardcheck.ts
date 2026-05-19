@@ -3,29 +3,30 @@ var cards:Set<string>=new Set;
 var images:Set<string>=new Set;
 var stat:Promise<string[]>[]=new Array;
 
-const perm=Deno.permissions.querySync({name:"read",path:'.'});
+const perm=Deno.permissions.querySync({name:"read",path:'..'});
 if(perm.state!=="granted") {
-	console.error("please run with --allow-read=.")
+	console.error("please run with --allow-read=..")
 	Deno.exit(1)
 }
 
-async function getcontents(dir:"img"|"boon"|"waylay"|"story"): Promise<string[]> {
-	var out:string[]=new Array;
-	for await(const i of Deno.readDir('card/'+dir)) {
-		if(!i.isFile) continue;
-		if(!i.name.match(/\.txt/)||i.name.match(/test/)) continue;
-		out.push(i.name.replace(/\.txt/i,''));
-	}
-	return out;
+async function acollect(a:AsyncGenerator<any>):Promise<any[]> {
+	var acc=[];
+	for await(const i of a) acc.push(i);
+	return acc;
 }
 
+function compose2(f1:(i:any)=>any,f2:(i:any)=>any):(i:any)=>any {
+	return (i) => f1(f2(i));
+}
 async function* ygetcontents(dir:"img"|"boon"|"waylay"|"story"): AsyncGenerator<string> {
-	for await(const i of Deno.readDir('card/'+dir)) {
+	for await(const i of Deno.readDir('../card/'+dir)) {
 		if(!i.isFile) continue;
 		if(!i.name.match(/\.(?:sv|pn|jpe?)g/i)||i.name.match(/test/)) continue;
 		yield i.name.replace(/\.(?:sv|pn|jpe?)g/i,'');
 	}
 }
+
+const getcontents=compose2(acollect,ygetcontents);
 
 stat.push(getcontents("boon"))
 stat.push(getcontents("waylay"))

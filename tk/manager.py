@@ -196,10 +196,7 @@ class App(tk.Tk):
 		if not title:
 			messagebox.showwarning("Missing title", "Title is required.")
 			return
-		new_slug = slugify(title)
-		if new_slug != slug:
-			delete_card(col, slug)
-		write_card(col, new_slug, {
+		write_card(col, slug, {
 			"title":   title,
 			"desc":    self.f_desc.get().strip(),
 			"xp":      self.f_xp.get(),
@@ -207,8 +204,7 @@ class App(tk.Tk):
 			"special": self.v_special.get(),
 			"content": self.f_body.get("1.0", tk.END).strip(),
 		})
-		self._current = (col, new_slug)
-		self._refresh_list(select_slug=new_slug)
+		self._refresh_list(select_slug=slug)
 
 	def _new_card(self):
 		col = self._current_collection()
