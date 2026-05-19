@@ -1,5 +1,6 @@
 import {slugify} from "https://deno.land/x/slugify/mod.ts";
 import {TextLineStream} from "jsr:@std/streams/text-line-stream";
+import {slugopt} from "../lib.ts";
 
 async function* _slurp(inf: string): AsyncGenerator<string> {
     const file = await Deno.open(inf);
