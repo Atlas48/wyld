@@ -27,7 +27,7 @@ def slugify(title: str) -> str:
 
 
 def list_cards(collection: str) -> list[str]:
-	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.txt"))
+	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.txt") if not p.stem.startswith("test"))
 
 def read_card(collection: str, slug: str) -> dict:
 	text = (CARD_DIR / collection / f"{slug}.txt").read_text(encoding="utf-8")
