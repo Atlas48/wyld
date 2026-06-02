@@ -1,7 +1,5 @@
 ---
 title: Payday!
-layout: card.pug
-url: /card/boon/payday.svg
 img: payday.jpg
 special: true
 desc: Resources

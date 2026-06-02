@@ -1,7 +1,5 @@
 ---
 title: Pub Crawl!
-layout: card.pug
-url: /card/story/pub-crawl.svg
 xp: 2
 special: false
 ---

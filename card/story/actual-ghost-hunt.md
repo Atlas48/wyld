@@ -1,7 +1,5 @@
 ---
 title: Actual Ghost Hunt
-layout: card.pug
-url: /card/story/actual-ghost-hunt.svg
 xp: 2
 special: false
 ---
