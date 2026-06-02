@@ -10,3 +10,6 @@ img/src
 *.zip
 *.tar
 *.gz
+boon.json
+waylay.json
+story.json
