@@ -12,7 +12,9 @@ if len(argv)>2:
 for i in argv:
 	try:
 		with Image.open(i) as im:
-			hw=HeightWidth(im.size) #aww yeah name that tuple.
+			#aww yeah name that tuple.
+			#its size B)
+			hw=HeightWidth(im.size)
 	except FileNotFoundError:
 		print(f"Listed file, {i}, does not exist.",file=stderr)
 		continue
