@@ -5,20 +5,10 @@ import re
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
-from os import environ as env
 import yaml
 from PIL import Image, ImageTk
 
-try:
-		CARD_DIR = Path(env['WYLDROOT']) / "card"
-except IndexError,KeyError:
-	from sys import stderr, exit
-	print("Please source env.sh from the repo root.",file=stderr)
-	exit(1)
-except Error as e:
-	from sys import stderr, exit
-	print("Encountered an error while attempting to get directory: ",e,file=stderr)
-	exit(1)
+CARD_DIR = Path('./card')
 COLLECTIONS = ("story", "boon", "waylay")
 
 
@@ -27,7 +17,7 @@ def slugify(title: str) -> str:
 
 
 def list_cards(collection: str) -> list[str]:
-	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.txt") if not p.stem.startswith("test"))
+	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
 
 def read_card(collection: str, slug: str) -> dict:
 	text = (CARD_DIR / collection / f"{slug}.txt").read_text(encoding="utf-8")
