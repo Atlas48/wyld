@@ -7,9 +7,8 @@ from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
 import yaml
 from PIL import Image, ImageTk
+from const import CARD_DIR, COLLECTIONS
 
-CARD_DIR = Path('./card')
-COLLECTIONS = ("story", "boon", "waylay")
 
 
 def slugify(title: str) -> str:
