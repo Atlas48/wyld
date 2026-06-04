@@ -1,6 +1,6 @@
 root=true
 [*]
 charset=utf-8
-[*.pug]
+[*.py]
 indent_type=tab
 indent_size=4
