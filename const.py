@@ -1,4 +1,4 @@
-from Pathlib import Path
+from pathlib import Path
 from enum import Enum
 
 class CardType(Enum):
