@@ -24,8 +24,8 @@
 	<image href="{{ datauri }}" x="16" y="40" width="168" height="120" clip-path="url(#imgclip)"/>
 	<rect x="12" y="170" width="176" height="36" fill="{{ background }}" stroke="{{ border }}" stroke-width="2"/>
 	<text x="100" y="194" font-family="serif" font-size="18" fill="#FFF" text-anchor="middle" font-weight="bold">{{(title)|escape}}</text>
-	<foreignObject x="12" y="170" width="176" height="100">
-		<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px;color:#313131">
+	<foreignObject x="16" y="210" width="170" height="100">
+		<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px;color:#313131;text-align:center">
 			{{content|markdown}}
 		</div>
 	</foreignObject>

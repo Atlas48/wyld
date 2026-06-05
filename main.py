@@ -36,12 +36,8 @@ for d in COLLECTIONS:
 		if not i.name.endswith('.md'):
 			continue
 		cc=frontmatter_loads(i.read_text())
-		try:
+		if 'img' in cc.metadata and cc.metadata['img'] is not None:
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
-			cc.metadata['type']=CardType(cc.metadata['type'])
-		except KeyError:
-			pass
-		try:
-			(build/i.with_suffix('.svg')).write_text(templ.card.render(**cc.metadata,content=cc.content,CardType=CardType))
-		except Warn as e:
-			print("Got Warning on %s: %s"%(i,e))
+		else:
+			print('Image not present for',i)
+		(build/i.with_suffix('.svg')).write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
