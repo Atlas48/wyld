@@ -5,6 +5,9 @@ export const conf = {
 };
 
 export const mdconf = {
+	options: {
+		breaks: true
+	},
 	plugins: [deflist]
 }
 
