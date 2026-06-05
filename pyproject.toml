@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "jinja2>=3.1.6",
+    "markdown>=3.10.2",
     "markdown-svg>=0.6.2",
     "python-frontmatter>=1.3.0",
     "toml>=0.10.2",
