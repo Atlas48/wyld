@@ -1,6 +1,6 @@
 ---
 title: Leah Fay
 special: true
-desc: Summon
 ---
+**Summon**
 Now its your turn.

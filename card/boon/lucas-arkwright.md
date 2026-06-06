@@ -2,6 +2,6 @@
 title: Lucas Arkwright
 img: lucas-arkwright.jpg
 special: true
-desc: Retainer
 ---
+**Retainer**
 Back, and even more a loverboy!
