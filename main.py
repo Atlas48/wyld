@@ -36,15 +36,14 @@ for d in COLLECTIONS:
 		if not i.name.endswith('.md'):
 			continue
 		dest=build/i.with_suffix('.svg')
-		ds=dest.stat()
-		ss=src.stat()
-		if ss.st_mtime>ds.mtime or ss.st_size!=ds.st_size:
-			del ds
-			del ss
-			continue
+		if dest.exists():
+			ss=i.stat()
+			ds=dest.stat()
+			if ss.st_mtime<ds.st_time or ss.st_size!=ds.st_size:
+				del ds
+				del ss
+				continue
 		cc=frontmatter_loads(i.read_text())
 		if 'img' in cc.metadata and cc.metadata['img'] is not None and ('datauri' not in cc.metadata or cc.metadata['datauri'] is None):
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
-		else:
-			print('Image not present for',i)
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
