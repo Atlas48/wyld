@@ -1,6 +1,7 @@
 ---
-title: 'The Estate, Part II'
+title: The Estate, Part II
 xp: 3
 special: false
 draft: true
+img: 
 ---
