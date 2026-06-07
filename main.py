@@ -39,7 +39,7 @@ for d in COLLECTIONS:
 		if dest.exists():
 			ss=i.stat()
 			ds=dest.stat()
-			if ss.st_mtime<ds.st_time or ss.st_size!=ds.st_size:
+			if ss.st_mtime<ds.st_mtime or ss.st_size!=ds.st_size:
 				del ds
 				del ss
 				continue
