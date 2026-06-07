@@ -194,3 +194,4 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 _site
+process.py
