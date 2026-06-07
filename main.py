@@ -26,18 +26,25 @@ jenv.globals['warn']=warn
 templ=Namespace(card=jenv.get_template('card.svg.j2'),basic=jenv.get_template('basic.html.j2'))
 
 for i in root.glob('*.md'):
-	cur=build/i.with_suffix('.html')
-	cur.write_text(templ.basic.render(content=i.read_text()))
+	src=build/i.with_suffix('.html')
+	src.write_text(templ.basic.render(content=i.read_text()))
 
 for d in COLLECTIONS:
-	cur=CARD_DIR/d
-	(build/cur).mkdir(exist_ok=True,parents=True)
-	for i in cur.iterdir():
+	src=CARD_DIR/d
+	(build/src).mkdir(exist_ok=True,parents=True)
+	for i in src.iterdir():
 		if not i.name.endswith('.md'):
 			continue
+		dest=build/i.with_suffix('.svg')
+		ds=dest.stat()
+		ss=src.stat()
+		if ss.st_mtime>ds.mtime or ss.st_size!=ds.st_size:
+			del ds
+			del ss
+			continue
 		cc=frontmatter_loads(i.read_text())
-		if 'img' in cc.metadata and cc.metadata['img'] is not None:
+		if 'img' in cc.metadata and cc.metadata['img'] is not None and ('datauri' not in cc.metadata or cc.metadata['datauri'] is None):
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
 		else:
 			print('Image not present for',i)
-		(build/i.with_suffix('.svg')).write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
+		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
