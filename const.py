@@ -11,7 +11,7 @@ class CardType(Enum):
 class Warn(Exception):
 	pass
 def datauri(p:str):
-	pp=CARD_DIR/"img"/Path(p)
+	pp=Path("img")/Path(p)
 	t=guess_type(p)[0]
 	if t is None:
 		raise TypeError('mimetypes could not guess type of %s'%p)
