@@ -1,6 +1,7 @@
 # Card renderer
 from types import SimpleNamespace as Namespace
 from pathlib import Path
+from functools import partial
 from jinja2 import Environment, FileSystemLoader
 from frontmatter import loads as frontmatter_loads
 from markdown import markdown
@@ -18,7 +19,7 @@ if not build.exists():
 		exit(1)
 
 jenv=Environment(loader=FileSystemLoader('templ'), trim_blocks=True, lstrip_blocks=True)
-jenv.filters['markdown']=markdown
+jenv.filters['markdown']=partial(markdown,extensions=['nl2br'])
 def warn(i):
 	raise Warn(i)
 jenv.globals['warn']=warn
@@ -36,14 +37,8 @@ for d in COLLECTIONS:
 		if not i.name.endswith('.md'):
 			continue
 		dest=build/i.with_suffix('.svg')
-		if dest.exists():
-			ss=i.stat()
-			ds=dest.stat()
-			if ss.st_mtime<ds.st_mtime or ss.st_size!=ds.st_size:
-				del ds
-				del ss
-				continue
 		cc=frontmatter_loads(i.read_text())
 		if 'img' in cc.metadata and cc.metadata['img'] is not None and ('datauri' not in cc.metadata or cc.metadata['datauri'] is None):
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
+		print(i.name,dest.name,sep=" -> ")
