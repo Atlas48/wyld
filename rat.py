@@ -27,7 +27,9 @@ for i in argv:
 		exit(1)
 	h=hw.w*5
 	w=hw.h*7
-	if h<=w:
+	if hw.h==120 and hw.w==168:
+		print(i,"doesn't need changing")
+	elif h<=w:
 		print(i,*hw,hw.w,w//7,sep="\t")
 	else:
 		print(i,*hw,hw.h,h//5,sep="\t")
