@@ -5,7 +5,7 @@ from functools import partial
 from jinja2 import Environment, FileSystemLoader
 from frontmatter import loads as frontmatter_loads
 from markdown import markdown
-from const import *
+from lib.const import *
 
 root=Path('.')
 build=Path('build')
