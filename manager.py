@@ -7,7 +7,7 @@ from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
 import yaml
 from PIL import Image, ImageTk
-from const import CARD_DIR, COLLECTIONS
+from lib.const import CARD_DIR, COLLECTIONS
 
 
 
