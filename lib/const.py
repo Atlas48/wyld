@@ -8,8 +8,6 @@ class CardType(Enum):
 	Boon=0
 	Waylay=1
 	Story=2
-class Warn(Exception):
-	pass
 def datauri(p:str):
 	pp=Path("img")/Path(p)
 	t=guess_type(p)[0]
