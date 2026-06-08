@@ -19,7 +19,7 @@ def list_cards(collection: str) -> list[str]:
 	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
 
 def read_card(collection: str, slug: str) -> dict:
-	text = (CARD_DIR / collection / f"{slug}.txt").read_text(encoding="utf-8")
+	text = (CARD_DIR / collection / f"{slug}.md").read_text(encoding="utf-8")
 	parts = text.split("---\n", 2)
 	if len(parts) < 3:
 		return {"title": slug, "content": text}
@@ -43,13 +43,13 @@ def write_card(collection: str, slug: str, data: dict):
 			front["xp"] = xp
 	except (ValueError, TypeError):
 		pass
-	(CARD_DIR / collection / f"{slug}.txt").write_text(
+	(CARD_DIR / collection / f"{slug}.md").write_text(
 		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True)}---\n{data.get('content', '').strip()}\n",
 		encoding="utf-8",
 	)
 
 def delete_card(collection: str, slug: str):
-	(CARD_DIR / collection / f"{slug}.txt").unlink()
+	(CARD_DIR / collection / f"{slug}.md").unlink()
 
 
 class App(tk.Tk):
