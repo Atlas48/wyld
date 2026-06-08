@@ -30,5 +30,8 @@ for d in COLLECTIONS:
 		cc=frontmatter_loads(i.read_text())
 		if 'img' in cc.metadata and cc.metadata['img'] is not None and ('datauri' not in cc.metadata or cc.metadata['datauri'] is None):
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
+		if 'txtsize' not in cc.metadata or cc.metadata['txtsize'] is None:
+			cc.metadata['txtsize']=0
+		cc.metadata['txtsize']+=11
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
 		print(i.name,dest.name,sep=" -> ")
