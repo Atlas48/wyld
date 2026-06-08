@@ -1,5 +1,5 @@
 ---
-special: true
+special: false
 title: Blanc
 img: blanc.png
 ---
