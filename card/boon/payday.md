@@ -2,6 +2,7 @@
 title: Payday!
 img: payday.jpg
 special: true
+txtsize: 2
 ---
 **Resources**
 Add £[Resources]d10*10

@@ -4,4 +4,5 @@ xp: 3
 special: false
 draft: true
 img: 
+txtsize: 0
 ---
