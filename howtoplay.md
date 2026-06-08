@@ -1,8 +1,3 @@
----
-title: Wyld Cards -- How to Play
-layout: basic.pug
----
-
 # Card Types
 - There are 3 card types
 - One that outlines the story of a session, and two that have effects on said story
