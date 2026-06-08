@@ -1,11 +1,8 @@
 # Card renderer
-from types import SimpleNamespace as Namespace
 from pathlib import Path
-from functools import partial
-from jinja2 import Environment, FileSystemLoader
 from frontmatter import loads as frontmatter_loads
-from markdown import markdown
 from lib.const import *
+from lib.jenv import jenv, templ 
 
 root=Path('.')
 build=Path('build')
@@ -18,13 +15,6 @@ if not build.exists():
 		print("Well gee, tell the file named build to MOVE ITS ASS. IT'S BLOCKING THE WAY OF A DIRECTORY.", file=stderr)
 		exit(1)
 
-jenv=Environment(loader=FileSystemLoader('templ'), trim_blocks=True, lstrip_blocks=True)
-jenv.filters['markdown']=partial(markdown,extensions=['nl2br'])
-def warn(i):
-	raise Warn(i)
-jenv.globals['warn']=warn
-
-templ=Namespace(card=jenv.get_template('card.svg.j2'),basic=jenv.get_template('basic.html.j2'))
 
 for i in root.glob('*.md'):
 	src=build/i.with_suffix('.html')
