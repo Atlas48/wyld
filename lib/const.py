@@ -19,4 +19,6 @@ def datauri(p:str):
 		return "data:%s;base64,%s"%(t,b64(pp.read_bytes()).decode())
 
 CARD_DIR = Path('./card')
+TEMPL = Path('./templ')
 COLLECTIONS = ("story", "boon", "waylay")
+coll=map(COLLECTIONS, lambda i: CARD_DIR/i)

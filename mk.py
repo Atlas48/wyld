@@ -2,7 +2,8 @@
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads
 from lib.const import *
-from lib.jenv import jenv, templ 
+from lib.jenv import jenv, templ
+from lib.incr import gethash
 
 root=Path('.')
 build=Path('build')
@@ -20,10 +21,9 @@ for i in root.glob('*.md'):
 	src=build/i.with_suffix('.html')
 	src.write_text(templ.basic.render(content=i.read_text()))
 
-for d in COLLECTIONS:
-	src=CARD_DIR/d
-	(build/src).mkdir(exist_ok=True,parents=True)
-	for i in src.iterdir():
+for d in coll:
+	(build/d).mkdir(exist_ok=True,parents=True)
+	for i in d.iterdir():
 		if not i.name.endswith('.md'):
 			continue
 		dest=build/i.with_suffix('.svg')
