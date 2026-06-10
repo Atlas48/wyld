@@ -177,7 +177,7 @@ class App(tk.Tk):
 		if col is None:
 			return
 		data = read_card(col, slug)
-		img_path = CARD_DIR / "img" / (data.get("img") or f"{slug}.png")
+		img_path = Path("img") / (data.get("img") or f"{slug}.png")
 		if img_path.suffix.lower() not in (".png", ".jpg", ".jpeg") or not img_path.exists():
 			messagebox.showinfo("No image", f"No image found for {slug}.")
 			return
