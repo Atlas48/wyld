@@ -1,6 +1,6 @@
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads
-from const import *
+from libconst import *
 
 for d in COLLECTIONS:
 	src=CARD_DIR/d
