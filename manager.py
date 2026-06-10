@@ -30,7 +30,6 @@ def read_card(collection: str, slug: str) -> dict:
 def write_card(collection: str, slug: str, data: dict):
 	front = {
 		"title":   data.get("title", ""),
-		"url":     f"/card/{collection}/{slug}.svg",
 		"special": bool(data.get("special", False)),
 	}
 	if data.get("img"):
