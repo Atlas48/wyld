@@ -3,7 +3,6 @@ _site
 _cache
 .env
 *[Pp]lot*.md
-card/img/src
 img/src
 # Filetypes
 *.patch

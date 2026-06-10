@@ -1,7 +1,8 @@
 ---
+img: nope.jpg
 special: false
 title: Nope
-img: 
 txtsize: 0
+url: /card/boon/nope.svg
 ---
-Negate one Waylay and return to hand.
+Negate one Waylay and return it to hand.
