@@ -32,6 +32,7 @@ for d in coll:
 			cc.metadata['datauri']=datauri(cc.metadata['img'])
 		if 'txtsize' not in cc.metadata or cc.metadata['txtsize'] is None:
 			cc.metadata['txtsize']=0
-		cc.metadata['txtsize']+=11
+		if 'ttlsize' not in cc.metadata or cc.metadata['ttlsize'] is None:
+			cc.metadata['ttlsize']=0
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.capitalize()],CardType=CardType))
 		print(i.name,dest.name,sep=" -> ")

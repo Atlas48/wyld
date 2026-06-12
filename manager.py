@@ -30,13 +30,10 @@ def read_card(collection: str, slug: str) -> dict:
 def write_card(collection: str, slug: str, data: dict):
 	front = {
 		"title":   data.get("title", ""),
-		"layout":  "card.pug",
-		"url":     f"/card/{collection}/{slug}.svg",
 		"special": bool(data.get("special", False)),
 	}
-	for key in ("desc", "img"):
-		if data.get(key):
-			front[key] = data[key]
+	if data.get("img"):
+		front["img"] = data["img"]
 	try:
 		xp = int(data.get("xp") or 0)
 		if xp:
@@ -104,13 +101,12 @@ class App(tk.Tk):
 		right.rowconfigure(6, weight=1)
 
 		self.f_title = ttk.Entry(right)
-		self.f_desc  = ttk.Entry(right)
 		self.f_xp    = ttk.Spinbox(right, from_=0, to=10, width=5)
 
 		self.f_txtsize = ttk.Spinbox(right, from_=-3, to=8, width=5)
 		for i, (lbl, w) in enumerate(zip(
-			("Title", "Desc", "XP", "Txtsize"),
-			(self.f_title, self.f_desc, self.f_xp, self.f_txtsize)
+			("Title", "XP", "Txtsize"),
+			(self.f_title, self.f_xp, self.f_txtsize)
 		)):
 			ttk.Label(right, text=lbl).grid(row=i, column=0, sticky="w", padx=(0, 6))
 			w.grid(row=i, column=1, sticky="ew", pady=2)
@@ -166,7 +162,6 @@ class App(tk.Tk):
 		self._current = (col, slug)
 		data = read_card(col, slug)
 		self.f_title.delete(0, tk.END);  self.f_title.insert(0, data.get("title", ""))
-		self.f_desc.delete(0, tk.END);   self.f_desc.insert(0, data.get("desc", "") or "")
 		self.f_xp.delete(0, tk.END);     self.f_xp.insert(0, str(data.get("xp") or 0))
 		self.f_txtsize.delete(0, tk.END); self.f_txtsize.insert(0, str(data.get("txtsize") or 0))
 		self.f_img.delete(0, tk.END);    self.f_img.insert(0, data.get("img", "") or "")
@@ -180,7 +175,7 @@ class App(tk.Tk):
 		if col is None:
 			return
 		data = read_card(col, slug)
-		img_path = CARD_DIR / "img" / (data.get("img") or f"{slug}.png")
+		img_path = Path("img") / (data.get("img") or f"{slug}.png")
 		if img_path.suffix.lower() not in (".png", ".jpg", ".jpeg") or not img_path.exists():
 			messagebox.showinfo("No image", f"No image found for {slug}.")
 			return
@@ -203,7 +198,6 @@ class App(tk.Tk):
 			return
 		write_card(col, slug, {
 			"title":   title,
-			"desc":    self.f_desc.get().strip(),
 			"xp":      self.f_xp.get(),
 			"txtsize": self.f_txtsize.get(),
 			"img":     self.f_img.get().strip(),

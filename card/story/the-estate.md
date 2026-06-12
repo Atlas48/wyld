@@ -4,6 +4,7 @@ title: The Estate
 xp: 2
 img: 
 txtsize: 0
+ttlsize: 0
 ---
 **Adds Waylay: Alphonse**
 Ari investigates the greenhouse of a large house.

@@ -4,5 +4,6 @@ img: ../img/test.png
 xp: 1
 special: true
 txtsize: 0
+ttlsize: 0
 ---
 Test story card.
