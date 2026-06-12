@@ -1,8 +1,9 @@
 ---
+img: blanc.png
 special: false
 title: Blanc
-img: blanc.png
-txtsize: 0
 ttlsize: 0
+txtsize: 0
+xp: 1
 ---
 Down to Clown with you anytime!
