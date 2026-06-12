@@ -4,6 +4,7 @@ xp: 2
 special: false
 img: 
 txtsize: 0
+ttlsize: 0
 ---
 Time to paint the town yellow!
 (Hopfully with beer...)

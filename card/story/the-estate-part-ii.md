@@ -5,4 +5,5 @@ special: false
 draft: true
 img: 
 txtsize: 0
+ttlsize: 0
 ---

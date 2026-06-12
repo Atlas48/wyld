@@ -4,5 +4,6 @@ xp: 2
 special: false
 img: 
 txtsize: 0
+ttlsize: 0
 ---
 Ari wants to go on a ghost hunt with everyone!
