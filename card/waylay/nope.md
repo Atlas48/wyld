@@ -2,8 +2,8 @@
 img: nope.jpg
 special: false
 title: Nope
-txtsize: 0
 ttlsize: 0
-url: /card/waylay/nope.svg
+txtsize: 0
+xp: 3
 ---
 Negate one Boon and return to hand.
