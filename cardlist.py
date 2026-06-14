@@ -18,6 +18,8 @@ def wrap(s1,s2):
 	return f"<{s1}>{s2}</{s1}>"
 def img(s):
 	return '<img src="%s" />'%s
+def a(*args):
+	return '<a href="%s">%s</a>'%args
 h1=partial(wrap,"h1")
 p=partial(wrap,"p")
 pr=partial(print,file=f)
@@ -37,6 +39,7 @@ for i in scan.iterdir():
 	pr(h1(i.name.capitalize()))
 	for ii in i.iterdir():
 		print(ii)
+		pr(a(ii.relative_to(root),ii))
 		pr(p(img(ii.relative_to(root))))
 f.write(foot)
 f.close()
