@@ -1,8 +1,7 @@
 ---
 title: Mushroom, Mushroom!
-xp: 1
 special: false
-img: 
+xp: 1
 txtsize: 0
 ttlsize: 0
 ---

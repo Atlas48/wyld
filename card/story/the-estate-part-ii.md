@@ -1,8 +1,8 @@
 ---
-special: false
 title: The Estate, Part II
-ttlsize: -1
-txtsize: 0
+special: false
 xp: 3
+txtsize: 0
+ttlsize: -1
 ---
 **Adds Story: The Estate, part III**

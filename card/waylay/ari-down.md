@@ -1,9 +1,9 @@
 ---
-img: ari-down.jpg
-special: false
 title: ARI DOWN
-ttlsize: 0
-txtsize: 0
+special: false
+img: ari-down.jpg
 xp: 3
+txtsize: 0
+ttlsize: 0
 ---
 Ari is unable to come to play.

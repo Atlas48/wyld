@@ -1,7 +1,7 @@
 ---
-img: vindication.jpg
-special: false
 title: Vindication
+special: false
+img: vindication.jpg
 txtsize: 0
 ttlsize: 0
 ---

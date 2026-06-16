@@ -1,8 +1,7 @@
 ---
 title: Going on a Wolf Hunt
-xp: 3
 special: false
-img: 
+xp: 3
 txtsize: 0
 ttlsize: 0
 ---

@@ -1,8 +1,7 @@
 ---
 title: The Thing in the Dark
-xp: 3
 special: false
-img: 
+xp: 3
 txtsize: 0
 ttlsize: 0
 ---

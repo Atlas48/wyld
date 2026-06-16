@@ -1,8 +1,7 @@
 ---
 title: Down in the Bowels of the Earth
-xp: 3
 special: false
-img: 
+xp: 3
 txtsize: 0
 ttlsize: 0
 ---

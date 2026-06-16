@@ -1,6 +1,6 @@
 ---
-special: true
 title: Blanc
+special: true
 img: blanc.png
 txtsize: 2
 ttlsize: 0

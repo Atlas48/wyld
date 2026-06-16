@@ -1,8 +1,7 @@
 ---
-special: false
 title: The Estate, Part III
+special: false
 xp: 4
-img: 
 txtsize: 0
 ttlsize: 0
 ---

@@ -1,6 +1,6 @@
 ---
-special: true
 title: Lucy Arkwright
+special: true
 img: lucy-arkwright.png
 txtsize: 2
 ttlsize: 0

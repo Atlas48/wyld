@@ -1,8 +1,7 @@
 ---
-special: true
 title: I Can't Decide
+special: true
 xp: 5
-img: 
 txtsize: 0
 ttlsize: 0
 ---

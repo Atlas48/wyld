@@ -1,8 +1,8 @@
 ---
-special: false
 title: Gremlins
-ttlsize: 0
-txtsize: 0
+special: false
 xp: 2
+txtsize: 0
+ttlsize: 0
 ---
 A piece of technology around you malfunctions.

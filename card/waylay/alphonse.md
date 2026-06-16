@@ -1,10 +1,9 @@
 ---
-special: false
 title: alphonse
-ttlsize: 0
-txtsize: 0
+special: false
 xp: 1
+txtsize: 0
+ttlsize: 0
 ---
-fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry 
-fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry
-fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry fairest? sorry
+*MY DEAREST OPHELIA ~~CALL ME A GOOD BOY~*
+*HAVE MY HAND IN MARRIAGE!*

@@ -1,7 +1,7 @@
 ---
 title: Payday!
-img: payday.jpg
 special: true
+img: payday.jpg
 txtsize: 1
 ttlsize: 0
 ---

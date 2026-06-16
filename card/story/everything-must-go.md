@@ -1,8 +1,7 @@
 ---
 title: Everything Must Go
-xp: 2
 special: false
-img: 
+xp: 2
 txtsize: 0
 ttlsize: 0
 ---

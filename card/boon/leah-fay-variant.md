@@ -1,7 +1,7 @@
 ---
-img: leah-fay-variant.png
-special: true
 title: Leah Fay
+special: true
+img: leah-fay-variant.png
 txtsize: 2
 ttlsize: 0
 ---

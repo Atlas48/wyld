@@ -1,8 +1,7 @@
 ---
 title: Gleamthorpe's Tale
-xp: 4
 special: false
-img: 
+xp: 4
 txtsize: 0
 ttlsize: 0
 ---
