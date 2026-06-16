@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-{% set divcss="font-size:"~txtsize+12~"px;color:#0A0A0A;text-align:center;vertical-align:middle;margin:0;padding:0 "~txtsize+12~"px;box-sizing:border-box" %}
 {% if type==CardType.Story %}
 {% set background='#7FBF7F' %}
 {% elif type==CardType.Boon %}
@@ -26,7 +25,8 @@
 	<rect x="12" y="170" width="176" height="36" fill="{{background|replace('7F','00')}}" stroke="{{border}}" stroke-width="2"/>
 	<text x="100" y="194" font-family="serif" font-size="{{ttlsize+18}}" fill="#FFF" text-anchor="middle" font-weight="bold">{{(title)|escape}}</text>
 	<foreignObject x="0" y="200" width="200" height="100">
-		<div xmlns="http://www.w3.org/1999/xhtml" style="{{divcss}}">
+{% set siz=txtsize+12 %}
+		<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:{{siz}}pt;color:#0A0A0A;text-align:center;vertical-align:middle;margin:0;padding:0 {{siz}}pt;box-sizing:border-box">
 		{{content|markdown}}
 		</div>
 	</foreignObject>
