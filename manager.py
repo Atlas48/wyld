@@ -8,12 +8,7 @@ from pathlib import Path
 import yaml
 from PIL import Image, ImageTk
 from lib.const import CARD_DIR, COLLECTIONS
-
-
-
-def slugify(title: str) -> str:
-	return re.sub(r"\s+", "-", re.sub(r'[!"£$%^*()\[\];\'#:@~`<>?,./|\\]', "", title.lower()).strip())
-
+from lib.func import slugify
 
 def list_cards(collection: str) -> list[str]:
 	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
