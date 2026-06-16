@@ -8,12 +8,7 @@ from pathlib import Path
 import yaml
 from PIL import Image, ImageTk
 from lib.const import CARD_DIR, COLLECTIONS
-
-
-
-def slugify(title: str) -> str:
-	return re.sub(r"\s+", "-", re.sub(r'[!"£$%^*()\[\];\'#:@~`<>?,./|\\]', "", title.lower()).strip())
-
+from lib.func import slugify
 
 def list_cards(collection: str) -> list[str]:
 	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
@@ -49,7 +44,7 @@ def write_card(collection: str, slug: str, data: dict):
 	except (ValueError, TypeError):
 		front["ttlsize"] = 0
 	(CARD_DIR / collection / f"{slug}.md").write_text(
-		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True)}---\n{data.get('content', '').strip()}\n",
+		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True, sort_keys=False)}---\n{data.get('content', '').strip()}\n",
 		encoding="utf-8",
 	)
 
