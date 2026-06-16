@@ -1,8 +1,9 @@
 ---
-title: WIMDY
 img: wimdy.jpg
 special: false
-txtsize: 0
+title: WIMDY
 ttlsize: 0
+txtsize: 0
+xp: 2
 ---
 it fucken WIMDY

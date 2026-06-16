@@ -1,9 +1,9 @@
 ---
-title: Odd Mushrooms
 special: false
-img: 
-txtsize: 0
+title: Odd Mushrooms
 ttlsize: 0
+txtsize: 0
+xp: 1
 ---
 Odd mushrooms sprout in a nearby field.
 They might be edible!

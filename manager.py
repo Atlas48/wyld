@@ -8,12 +8,7 @@ from pathlib import Path
 import yaml
 from PIL import Image, ImageTk
 from lib.const import CARD_DIR, COLLECTIONS
-
-
-
-def slugify(title: str) -> str:
-	return re.sub(r"\s+", "-", re.sub(r'[!"£$%^*()\[\];\'#:@~`<>?,./|\\]', "", title.lower()).strip())
-
+from lib.func import slugify
 
 def list_cards(collection: str) -> list[str]:
 	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
@@ -44,8 +39,12 @@ def write_card(collection: str, slug: str, data: dict):
 		front["txtsize"] = int(data.get("txtsize") or 0)
 	except (ValueError, TypeError):
 		front["txtsize"] = 0
+	try:
+		front["ttlsize"] = int(data.get("ttlsize") or 0)
+	except (ValueError, TypeError):
+		front["ttlsize"] = 0
 	(CARD_DIR / collection / f"{slug}.md").write_text(
-		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True)}---\n{data.get('content', '').strip()}\n",
+		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True, sort_keys=False)}---\n{data.get('content', '').strip()}\n",
 		encoding="utf-8",
 	)
 
@@ -98,22 +97,23 @@ class App(tk.Tk):
 		right = ttk.Frame(self)
 		right.grid(row=0, column=1, sticky="nsew", padx=6, pady=6)
 		right.columnconfigure(1, weight=1)
-		right.rowconfigure(6, weight=1)
+		right.rowconfigure(7, weight=1)
 
 		self.f_title = ttk.Entry(right)
 		self.f_xp    = ttk.Spinbox(right, from_=0, to=10, width=5)
 
 		self.f_txtsize = ttk.Spinbox(right, from_=-3, to=8, width=5)
+		self.f_ttlsize = ttk.Spinbox(right, from_=-3, to=8, width=5)
 		for i, (lbl, w) in enumerate(zip(
-			("Title", "XP", "Txtsize"),
-			(self.f_title, self.f_xp, self.f_txtsize)
+			("Title", "XP", "Txtsize", "Ttlsize"),
+			(self.f_title, self.f_xp, self.f_txtsize, self.f_ttlsize)
 		)):
 			ttk.Label(right, text=lbl).grid(row=i, column=0, sticky="w", padx=(0, 6))
 			w.grid(row=i, column=1, sticky="ew", pady=2)
-		ttk.Label(right, text="Img").grid(row=4, column=0, sticky="w", padx=(0, 6))
+		ttk.Label(right, text="Img").grid(row=5, column=0, sticky="w", padx=(0, 6))
 
 		img_row = ttk.Frame(right)
-		img_row.grid(row=4, column=1, sticky="ew", pady=2)
+		img_row.grid(row=5, column=1, sticky="ew", pady=2)
 		img_row.columnconfigure(0, weight=1)
 		self.f_img = ttk.Entry(img_row)
 		self.f_img.grid(row=0, column=0, sticky="ew")
@@ -127,17 +127,17 @@ class App(tk.Tk):
 		self.btn_preview.grid_remove()
 
 		self.v_special = tk.BooleanVar()
-		ttk.Checkbutton(right, text="Special", variable=self.v_special).grid(row=5, column=1, sticky="w")
+		ttk.Checkbutton(right, text="Special", variable=self.v_special).grid(row=6, column=1, sticky="w")
 
-		ttk.Label(right, text="Body").grid(row=6, column=0, sticky="nw", pady=(4, 0))
+		ttk.Label(right, text="Body").grid(row=7, column=0, sticky="nw", pady=(4, 0))
 		self.f_body = tk.Text(right, wrap=tk.WORD, undo=True)
 		sb_body = ttk.Scrollbar(right, orient=tk.VERTICAL, command=self.f_body.yview)
 		self.f_body.config(yscrollcommand=sb_body.set)
-		self.f_body.grid(row=6, column=1, sticky="nsew", pady=(4, 0))
-		sb_body.grid(row=6, column=2, sticky="ns", pady=(4, 0))
+		self.f_body.grid(row=7, column=1, sticky="nsew", pady=(4, 0))
+		sb_body.grid(row=7, column=2, sticky="ns", pady=(4, 0))
 
 		ttk.Button(right, text="Save", command=self._save_card).grid(
-			row=7, column=0, columnspan=3, sticky="ew", pady=(6, 0))
+			row=8, column=0, columnspan=3, sticky="ew", pady=(6, 0))
 
 	def _current_collection(self) -> str:
 		return COLLECTIONS[self.nb.index(self.nb.select())]
@@ -164,6 +164,7 @@ class App(tk.Tk):
 		self.f_title.delete(0, tk.END);  self.f_title.insert(0, data.get("title", ""))
 		self.f_xp.delete(0, tk.END);     self.f_xp.insert(0, str(data.get("xp") or 0))
 		self.f_txtsize.delete(0, tk.END); self.f_txtsize.insert(0, str(data.get("txtsize") or 0))
+		self.f_ttlsize.delete(0, tk.END); self.f_ttlsize.insert(0, str(data.get("ttlsize") or 0))
 		self.f_img.delete(0, tk.END);    self.f_img.insert(0, data.get("img", "") or "")
 		self.v_special.set(bool(data.get("special", False)))
 		self.f_body.delete("1.0", tk.END)
@@ -200,6 +201,7 @@ class App(tk.Tk):
 			"title":   title,
 			"xp":      self.f_xp.get(),
 			"txtsize": self.f_txtsize.get(),
+			"ttlsize": self.f_ttlsize.get(),
 			"img":     self.f_img.get().strip(),
 			"special": self.v_special.get(),
 			"content": self.f_body.get("1.0", tk.END).strip(),

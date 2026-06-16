@@ -4,6 +4,7 @@ from frontmatter import loads as frontmatter_loads
 from lib.const import *
 from lib.jenv import jenv, templ
 from lib.incr import gethash
+from lib.func import datauri
 
 root=Path('.')
 build=Path('build')
