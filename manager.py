@@ -49,7 +49,7 @@ def write_card(collection: str, slug: str, data: dict):
 	except (ValueError, TypeError):
 		front["ttlsize"] = 0
 	(CARD_DIR / collection / f"{slug}.md").write_text(
-		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True)}---\n{data.get('content', '').strip()}\n",
+		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True, sort_keys=False)}---\n{data.get('content', '').strip()}\n",
 		encoding="utf-8",
 	)
 
