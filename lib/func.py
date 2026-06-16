@@ -1,3 +1,5 @@
+from pathlib import Path
+
 def datauri(p:str):
 	pp=Path("img")/Path(p)
 	t=guess_type(p)[0]
