@@ -1,4 +1,7 @@
 from pathlib import Path
+from mimetypes import guess_type
+from base64 import b64encode as b64
+from urllib.parse import quote as urlencode
 
 def datauri(p:str):
 	pp=Path("img")/Path(p)
