@@ -1,8 +1,5 @@
-from pathlib import Path
 from enum import Enum
-from base64 import b64encode as b64
-from mimetypes import guess_type
-from urllib.parse import quote as urlencode
+from pathlib import Path
 
 class CardType(Enum):
 	Boon=0
@@ -10,6 +7,4 @@ class CardType(Enum):
 	Story=2
 
 CARD_DIR = Path('./card')
-TEMPL = Path('./templ')
 COLLECTIONS = ("story", "boon", "waylay")
-coll=map(COLLECTIONS, lambda i: CARD_DIR/i)
