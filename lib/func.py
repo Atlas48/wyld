@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from mimetypes import guess_type
 from base64 import b64encode as b64

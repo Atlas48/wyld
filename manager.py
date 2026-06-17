@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Wyldcard card management GUI."""
 
-import re
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
