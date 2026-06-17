@@ -5,5 +5,5 @@ img: lucy-arkwright.png
 txtsize: 2
 ttlsize: 0
 ---
-**Retainer**
+**Summon (Retainer)**
 Don't accidentally step on her!

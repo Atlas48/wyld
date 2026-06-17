@@ -5,5 +5,5 @@ img: lucas-arkwright.jpg
 txtsize: 2
 ttlsize: 0
 ---
-**Retainer**
+**Summon (Retainer)**
 Back, and even more a loverboy!
