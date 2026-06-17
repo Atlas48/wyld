@@ -2,7 +2,7 @@
 title: Portent
 special: false
 img: portent.png
-txtsize: -5
+txtsize: -3
 ttlsize: 0
 ---
 Roll two d10s and record the numbers rolled.
