@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sys import stderr, argv
 try:
     ctype = argv[1]

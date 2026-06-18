@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Card renderer
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sys import stderr, argv,
 from collections import namedtuple
 from math import floor
