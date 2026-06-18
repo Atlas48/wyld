@@ -6,5 +6,8 @@ class CardType(Enum):
 	Waylay=1
 	Story=2
 
+root=Path('.')
+build=Path('build')
+temf=Path('templ')
 CARD_DIR = Path('./card')
 COLLECTIONS = ("story", "boon", "waylay")
