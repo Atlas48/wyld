@@ -1,5 +1,5 @@
 import pickle
-from xhash import xxh64 as xxh
+from xxhash import xxh64 as xxh
 from .const import *
 from pathlib import Path
 
@@ -29,7 +29,7 @@ def mkhash():
 			out[str(i)]=x.digest()
 			x.reset()
 	return out
-def templupdated(p,):
+def templupdated(p,fhash):
 	c=temf/p
 	return fhash.get(str(c))!=qxh(c.read_bytes())
 

@@ -4,9 +4,9 @@ from pathlib import Path
 from frontmatter import loads as frontmatter_loads
 from lib.const import *
 from lib.jenv import jenv, templ
-from lib.incr import gethash
+from lib.incr import *
 from lib.func import datauri
-from xhash import xxh64 as xxh
+from xxhash import xxh64 as xxh
 
 x=xxh()
 ap=argparse.ArgumentParser()
@@ -27,8 +27,8 @@ if fhash is None or arg.all:
 	fhash=mkhash()
 
 print('Checking templates')
-cardupdated=templupdated('card')
-baseupdated=templupdated('base')
+cardupdated=templupdated('card.svg.j2',fhash)
+baseupdated=templupdated('basic.html.j2',fhash)
 
 for i in root.glob('*.md'):
 	ch=qxh(i.read_bytes())
