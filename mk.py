@@ -36,10 +36,10 @@ basesame=templsame('basic.html.j2',fhash)
 for i in root.glob('*.md'):
 	ch=qxh(i.read_bytes())
 	if not arg.all and basesame and fhash.get(str(i))==ch:
-		fhash[str(i)]=ch
 		continue
 	src=build/i.with_suffix('.html')
 	src.write_text(templ.basic.render(content=i.read_text()))
+	fhash[str(i)]=ch
 
 for d in coll:
 	(build/d).mkdir(exist_ok=True,parents=True)
@@ -48,7 +48,6 @@ for d in coll:
 			continue
 		ch=qxh(i.read_bytes())
 		if not arg.all and cardsame and fhash.get(str(i))==ch:
-			fhash[str(i)]=ch
 			continue #as well
 		dest=build/d/i.with_suffix('.svg').name
 		cc=frontmatter_loads(i.read_text())
@@ -59,6 +58,7 @@ for d in coll:
 		if 'ttlsize' not in cc.metadata or cc.metadata['ttlsize'] is None:
 			cc.metadata['ttlsize']=0
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.name.capitalize()],CardType=CardType))
+		fhash[str(i)]=ch
 		print(i.name,dest.name,sep=" -> ")
 if shash!=fhash:
 	with open('hash.pkl','wb') as f:

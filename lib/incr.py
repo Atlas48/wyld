@@ -23,18 +23,10 @@ def gethash():
 		print("hash.pkl is corrupt, cleaning.",file=stderr)
 		rm('hash.pkl')
 		return {}
-
 def mkhash():
 	out={}
 	for i in tempf.iterdir():
 		out[str(i)]=qxh(i.read_bytes())
-	for d in coll:
-		if not d.is_dir():
-			continue
-		for i in d.iterdir():
-			x.update(i.read_bytes())
-			out[str(i)]=x.digest()
-			x.reset()
 	return out
 def templsame(p,fhash):
 	c=tempf/p
