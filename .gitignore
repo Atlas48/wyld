@@ -192,3 +192,4 @@ __marimo__/
 .streamlit/secrets.toml
 _site
 process.py
+hash.pkl
