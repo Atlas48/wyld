@@ -8,7 +8,7 @@ class CardType(Enum):
 
 root=Path('.')
 build=Path('build')
-temf=Path('templ')
+tempf=Path('templ')
 CARD_DIR = Path('./card')
 COLLECTIONS = ("story", "boon", "waylay")
-coll=map(Path, COLLECTIONS)
+coll=[CARD_DIR/c for c in COLLECTIONS]

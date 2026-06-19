@@ -17,11 +17,18 @@ def gethash():
 			return pickle.load(f)
 	except FileNotFoundError:
 		return {}
+	except (EOFError, pickle.UnpicklingError):
+		from os import remove as rm
+		from sys import stderr
+		print("hash.pkl is corrupt, cleaning.",file=stderr)
+		rm('hash.pkl')
+		return {}
+
 def mkhash():
 	out={}
 	for i in tempf.iterdir():
 		out[str(i)]=qxh(i.read_bytes())
-	for d in coll.iterdir():
+	for d in coll:
 		if not d.is_dir():
 			continue
 		for i in d.iterdir():
@@ -29,8 +36,12 @@ def mkhash():
 			out[str(i)]=x.digest()
 			x.reset()
 	return out
-def templupdated(p,fhash):
-	c=temf/p
-	return fhash.get(str(c))!=qxh(c.read_bytes())
+def templsame(p,fhash):
+	c=tempf/p
+	h=qxh(c.read_bytes())
+	out=fhash.get(str(c))==h
+	if not out:
+		fhash[str(c)]=h
+	return h
 
-__all__ = ['gethash','qxh','mkhash','templupdated']
+__all__ = ['gethash','qxh','mkhash','templsame']
