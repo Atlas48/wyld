@@ -16,15 +16,19 @@ ap=argparse.ArgumentParser()
 ap.add_argument('-a','--all',action='store_true')
 arg=ap.parse_args()
 fhash=gethash()
-shash=deepcopy(fhash)
 
-if not build.exists():
+if build.exists():
+	fhash=gethash()
+	shash=deepcopy(fhash)
+else:
+	fhash={}
 	try:
 		build.mkdir()
 	except FileExistsError:
 		from sys import stderr,exit
 		print("Well gee, tell the file named build to MOVE ITS ASS. IT'S BLOCKING THE WAY OF A DIRECTORY.", file=stderr)
 		exit(1)
+shash=deepcopy(fhash)
 
 if fhash=={} or arg.all:
 	print('Rebuilding...')
