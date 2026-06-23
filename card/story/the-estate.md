@@ -1,6 +1,7 @@
 ---
 title: The Estate
 special: false
+img: the-estate.jpg
 xp: 2
 txtsize: 0
 ttlsize: 0
