@@ -101,8 +101,8 @@ class App(tk.Tk):
 		self.f_title = ttk.Entry(right)
 		self.f_xp    = ttk.Spinbox(right, from_=0, to=10, width=5)
 
-		self.f_txtsize = ttk.Spinbox(right, from_=-3, to=8, width=5)
-		self.f_ttlsize = ttk.Spinbox(right, from_=-3, to=8, width=5)
+		self.f_txtsize = ttk.Spinbox(right, from_=-0xFF, to=0xFF, width=5)
+		self.f_ttlsize = ttk.Spinbox(right, from_=-0xFF, to=0xFF, width=5)
 		for i, (lbl, w) in enumerate(zip(
 			("Title", "XP", "Txtsize", "Ttlsize"),
 			(self.f_title, self.f_xp, self.f_txtsize, self.f_ttlsize)
