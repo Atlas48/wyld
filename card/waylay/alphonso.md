@@ -1,5 +1,5 @@
 ---
-title: alphonse
+title: Alphonso
 special: false
 xp: 1
 txtsize: 0
