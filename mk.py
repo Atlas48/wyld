@@ -34,7 +34,7 @@ if fhash=={} or arg.all:
 	print('Rebuilding...')
 	fhash=mkhash()
 
-print('Checking templates')
+print('Checking templates...')
 cardsame=templsame('card.svg.j2',fhash)
 basesame=templsame('basic.html.j2',fhash)
 
