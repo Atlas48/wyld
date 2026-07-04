@@ -68,5 +68,5 @@ for d in coll:
 if shash!=fhash:
 	with open('hash.pkl','wb') as f:
 		pickle_dump(fhash,f)
-else:
+elif not arg.all:
 	print("Nothing to compile.")
