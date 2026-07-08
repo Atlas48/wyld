@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads
 from libconst import *
