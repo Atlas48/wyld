@@ -11,8 +11,8 @@ except (IndexError, ValueError):
 	sys.exit(1)
 
 if w * 5 <= h * 7:
-	new = w, floor(w * 5 / 7 + 0.5)
+	new = w, (w*5)//7
 else:
-	new = floor(h * 7 / 5 + 0.5), h
+	new = (h*7)//5, h
 
 print("%dx%d"%new)
