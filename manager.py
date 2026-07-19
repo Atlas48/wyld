@@ -1,13 +1,26 @@
 #!/usr/bin/env python3
 """Wyldcard card management GUI."""
 
+import importlib.util
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
+import frontmatter
 import yaml
 from PIL import Image, ImageTk
-from lib.const import CARD_DIR, COLLECTIONS
+from lib.const import CARD_DIR, COLLECTIONS, CardType
 from lib.func import slugify
+
+SCRIPTS_DIR = Path("scripts")
+
+def _load_scripts() -> dict:
+	mods = {}
+	for path in SCRIPTS_DIR.glob("*.py"):
+		spec = importlib.util.spec_from_file_location(path.stem, path)
+		mod = importlib.util.module_from_spec(spec)
+		spec.loader.exec_module(mod)
+		mods[path.stem] = mod
+	return mods
 
 def list_cards(collection: str) -> list[str]:
 	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
@@ -92,6 +105,7 @@ class App(tk.Tk):
 
 		ttk.Button(left, text="New",    command=self._new_card   ).grid(row=1, column=0, sticky="ew", pady=(4, 0))
 		ttk.Button(left, text="Delete", command=self._delete_card).grid(row=1, column=1, sticky="ew", pady=(4, 0))
+		ttk.Button(left, text="Batch",  command=self._open_batch ).grid(row=2, column=0, columnspan=2, sticky="ew", pady=(4, 0))
 
 		right = ttk.Frame(self)
 		right.grid(row=0, column=1, sticky="nsew", padx=6, pady=6)
@@ -225,6 +239,69 @@ class App(tk.Tk):
 			delete_card(col, slug)
 			self._current = (None, None)
 			self._refresh_list()
+
+	def _open_batch(self):
+		win = tk.Toplevel(self)
+		win.title("Batch")
+		win.columnconfigure(1, weight=1)
+
+		scripts = _load_scripts()
+		queriers = {n: m.query  for n, m in scripts.items() if hasattr(m, "query")}
+		changers = {n: m.change for n, m in scripts.items() if hasattr(m, "change")}
+
+		ttk.Label(win, text="Query").grid(row=0, column=0, sticky="w")
+		q_pick = ttk.Combobox(win, values=["(custom)"] + list(queriers), state="readonly")
+		q_pick.current(0)
+		q_pick.grid(row=0, column=1, sticky="ew")
+		q_text = tk.Text(win, height=6, undo=True)
+		q_text.insert("1.0", "def query(post, card_type):\n\treturn True\n")
+		q_text.grid(row=1, column=0, columnspan=2, sticky="nsew")
+		win.rowconfigure(1, weight=1)
+
+		ttk.Label(win, text="Change").grid(row=2, column=0, sticky="w")
+		c_pick = ttk.Combobox(win, values=["(custom)"] + list(changers), state="readonly")
+		c_pick.current(0)
+		c_pick.grid(row=2, column=1, sticky="ew")
+		c_text = tk.Text(win, height=6, undo=True)
+		c_text.insert("1.0", "def change(post, card_type):\n\treturn post\n")
+		c_text.grid(row=3, column=0, columnspan=2, sticky="nsew")
+		win.rowconfigure(3, weight=1)
+
+		results = tk.Listbox(win, selectmode=tk.EXTENDED)
+		results.grid(row=4, column=0, columnspan=2, sticky="nsew", pady=(6, 0))
+		win.rowconfigure(4, weight=1)
+		matches: list[tuple[str, str]] = []
+
+		def resolve(pick, text, table, name):
+			if pick.get() != "(custom)":
+				return table[pick.get()]
+			ns = {}
+			exec(text.get("1.0", tk.END), ns)
+			return ns[name]
+
+		def find():
+			nonlocal matches
+			query_fn = resolve(q_pick, q_text, queriers, "query")
+			matches = [
+				(col, s)
+				for col in COLLECTIONS
+				for s in list_cards(col)
+				if query_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
+			]
+			results.delete(0, tk.END)
+			for col, s in matches:
+				results.insert(tk.END, f"{col}/{s}")
+
+		def apply():
+			change_fn = resolve(c_pick, c_text, changers, "change")
+			for col, s in matches:
+				post = change_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
+				write_card(col, s, dict(post.metadata, content=post.content))
+			self._refresh_list()
+			win.destroy()
+
+		ttk.Button(win, text="Find", command=find).grid(row=5, column=0, sticky="ew")
+		ttk.Button(win, text="Apply", command=apply).grid(row=5, column=1, sticky="ew")
 
 
 if __name__ == "__main__":
