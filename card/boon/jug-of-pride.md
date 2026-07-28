@@ -1,5 +1,5 @@
 ---
-title: Jug of Smugness
+title: Jug of Pride
 special: false
 img: smugjug.jpg
 txtsize: 3
