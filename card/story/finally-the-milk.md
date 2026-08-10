@@ -5,4 +5,4 @@ xp: 4
 txtsize: 1
 ttlsize: 0
 ---
-Lucy's mother returns.
+The Arkwright sibings' mother returns.
