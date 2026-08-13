@@ -6,7 +6,7 @@ xp: 8
 txtsize: 0
 ttlsize: -2
 ---
-The dews of night still fresh on the leaf
-From old morrow it wained through to keep.
-For the children have found the green again
-and nothing else will be still.
+*"The dews of night still fresh on the leaf*
+*From old morrow it wained through to keep.*
+*For the children have found the green again*
+*and nothing else will be still."*
