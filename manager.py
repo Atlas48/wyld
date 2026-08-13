@@ -72,6 +72,7 @@ class App(tk.Tk):
 		self._current: tuple[str | None, str | None] = (None, None)
 		self._build()
 		self._refresh_list()
+		self.bind_all("<Control-s>", self._save_card)
 
 	def _build(self):
 		self.columnconfigure(1, weight=1)
@@ -201,7 +202,7 @@ class App(tk.Tk):
 		lbl.image = photo
 		lbl.pack()
 
-	def _save_card(self):
+	def _save_card(self, event=None):
 		col, slug = self._current
 		if col is None:
 			messagebox.showwarning("Nothing selected", "Select or create a card first.")
@@ -210,7 +211,11 @@ class App(tk.Tk):
 		if not title:
 			messagebox.showwarning("Missing title", "Title is required.")
 			return
-		write_card(col, slug, {
+		new_slug = slugify(title)
+		if new_slug != slug and (CARD_DIR / col / f"{new_slug}.md").exists():
+			messagebox.showwarning("Duplicate", f"A card named '{new_slug}' already exists.")
+			return
+		write_card(col, new_slug, {
 			"title":   title,
 			"xp":      self.f_xp.get(),
 			"txtsize": self.f_txtsize.get(),
@@ -219,7 +224,10 @@ class App(tk.Tk):
 			"special": self.v_special.get(),
 			"content": self.f_body.get("1.0", tk.END).strip(),
 		})
-		self._refresh_list(select_slug=slug)
+		if new_slug != slug:
+			delete_card(col, slug)
+		self._current = (col, new_slug)
+		self._refresh_list(select_slug=new_slug)
 
 	def _new_card(self):
 		col = self._current_collection()
