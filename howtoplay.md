@@ -2,6 +2,7 @@
 - There are 3 card types.
 - One that outlines the story of a session, and two that have effects on said story.
 - **Boons** add positive effects applied per session.
+- **Summons** are helpful NPCs that can be added to the play session.
 - **Waylays** are negative effects applied per session.
 - **Stories** are what you will be playing in a session.
 - Story cards have an associated XP reward.
@@ -16,6 +17,7 @@
 	1. **Episode List** (6 cards): A list of 6 stories that will be iterated over.
 	2. **Active Boons** (3 cards): The boons that will be active during the current story.
 	3. **Active Waylays** (5 cards): The waylays that will be active during the current story.
+	4. **Summon List** (2 cards): The two summons that will be active during the current story.
 
 # Play
 - Upon chronicle start...
