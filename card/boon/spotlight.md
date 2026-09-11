@@ -1,6 +1,7 @@
 ---
 title: Spotlight
 special: false
+img: spotlight.png
 txtsize: 0
 ttlsize: 0
 ---
