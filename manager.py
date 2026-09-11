@@ -283,28 +283,36 @@ class App(tk.Tk):
 		def resolve(pick, text, table, name):
 			if pick.get() != "(custom)":
 				return table[pick.get()]
-			ns = {}
+			ns = {"CardType": CardType}
 			exec(text.get("1.0", tk.END), ns)
 			return ns[name]
 
 		def find():
 			nonlocal matches
-			query_fn = resolve(q_pick, q_text, queriers, "query")
-			matches = [
-				(col, s)
-				for col in COLLECTIONS
-				for s in list_cards(col)
-				if query_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
-			]
+			try:
+				query_fn = resolve(q_pick, q_text, queriers, "query")
+				matches = [
+					(col, s)
+					for col in COLLECTIONS
+					for s in list_cards(col)
+					if query_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
+				]
+			except Exception as e:
+				messagebox.showerror("Query failed", str(e))
+				return
 			results.delete(0, tk.END)
 			for col, s in matches:
 				results.insert(tk.END, f"{col}/{s}")
 
 		def apply():
-			change_fn = resolve(c_pick, c_text, changers, "change")
-			for col, s in matches:
-				post = change_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
-				write_card(col, s, dict(post.metadata, content=post.content))
+			try:
+				change_fn = resolve(c_pick, c_text, changers, "change")
+				for col, s in matches:
+					post = change_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
+					write_card(col, s, dict(post.metadata, content=post.content))
+			except Exception as e:
+				messagebox.showerror("Change failed", str(e))
+				return
 			self._refresh_list()
 			win.destroy()
 
