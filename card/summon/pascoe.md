@@ -1,6 +1,6 @@
 ---
 title: Pascoe
-special: true
+special: false
 img: pascoe.png
 txtsize: 2
 ttlsize: 0

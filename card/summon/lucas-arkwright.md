@@ -1,6 +1,6 @@
 ---
 title: Lucas Arkwright
-special: true
+special: false
 img: lucas-arkwright.jpg
 txtsize: 2
 ttlsize: 0
