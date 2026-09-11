@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads
-from libconst import *
+from lib.const import *
 
 for d in COLLECTIONS:
 	src=CARD_DIR/d
