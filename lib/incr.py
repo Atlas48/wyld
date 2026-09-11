@@ -1,7 +1,6 @@
 import pickle
 from xxhash import xxh64 as xxh
 from .const import *
-from pathlib import Path
 
 x=xxh()
 
@@ -31,9 +30,9 @@ def mkhash():
 def templsame(p,fhash):
 	c=tempf/p
 	h=qxh(c.read_bytes())
-	out=fhash.get(str(c))==h
-	if not out:
+	out=fhash.get(str(c))!=h
+	if out:
 		fhash[str(c)]=h
-	return h
+	return not out
 
 __all__ = ['gethash','qxh','mkhash','templsame']

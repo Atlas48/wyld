@@ -2,42 +2,40 @@
 # Card renderer
 import argparse
 from copy import deepcopy
-from pathlib import Path
 from pickle import dump as pickle_dump
 from frontmatter import loads as frontmatter_loads
 from lib.const import *
-from lib.jenv import jenv, templ
+from lib.jenv import templ
 from lib.incr import *
 from lib.func import datauri
-from xxhash import xxh64 as xxh
 
-x=xxh()
 ap=argparse.ArgumentParser()
 ap.add_argument('-a','--all',action='store_true')
 arg=ap.parse_args()
-fhash=gethash()
+setup=build.exists()
 
-if build.exists():
+if setup:
 	fhash=gethash()
 	shash=deepcopy(fhash)
 else:
 	fhash={}
 	try:
+		print('#= Build dir does not exist, creating...')
 		build.mkdir()
 	except FileExistsError:
 		from sys import stderr,exit
-		print("Well gee, tell the file named build to MOVE ITS ASS. IT'S BLOCKING THE WAY OF A DIRECTORY.", file=stderr)
+		print("!= Well gee, tell the file named build to MOVE ITS ASS. IT'S BLOCKING THE WAY OF A DIRECTORY.", file=stderr)
 		exit(1)
-shash=deepcopy(fhash)
 
 if fhash=={} or arg.all:
 	print('Rebuilding...')
 	fhash=mkhash()
 
-print('Checking templates...')
+print('== Checking templates...')
 cardsame=templsame('card.svg.j2',fhash)
 basesame=templsame('basic.html.j2',fhash)
 
+print('== Checking files...')
 for i in root.glob('*.md'):
 	ch=qxh(i.read_bytes())
 	if not arg.all and basesame and fhash.get(str(i))==ch:
@@ -65,8 +63,8 @@ for d in coll:
 		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.name.capitalize()],CardType=CardType))
 		fhash[str(i)]=ch
 		print(i.name,dest.name,sep=" -> ")
-if shash!=fhash:
+if not setup or shash!=fhash:
 	with open('hash.pkl','wb') as f:
 		pickle_dump(fhash,f)
 elif not arg.all:
-	print("Nothing to compile.")
+	print("== Nothing to compile.")
