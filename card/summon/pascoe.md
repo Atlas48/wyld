@@ -5,6 +5,5 @@ img: pascoe.png
 txtsize: 2
 ttlsize: 0
 ---
-**Summon (Retainer)**
-👋|👉🤡❌.😡|👉👍🎉🎊
-🐉🗡👉🧎|👈🫂|🫡
+They're silent, but not deadly.
+They're actually quite friendly!
