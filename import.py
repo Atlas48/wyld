@@ -1,54 +1,45 @@
 #!/usr/bin/env python3
 from sys import stderr, argv
 try:
-    ctype = argv[1]
-    files = argv[2:]
+	ctype = argv[1]
+	files = argv[2:]
 except IndexError:
-    print('%s: [waylay|boon|story] <import files>' % argv[0], file=stderr)
-    exit()
+	print('%s: [waylay|boon|story] <import files>' % argv[0], file=stderr)
+	exit()
 
-import re
+from subprocess import Popen, PIPE
 from pathlib import Path
 from lib.func import slugify
-from frontmatter import Post, dump as frontmatter_dump
+
+template = '''---
+title: %s
+layout: card.pug
+special: false
+xp: 0
+---
+
+%s
+'''
 
 for fn in files:
-    with open(fn, 'r') as f:
-        title = None
-        content_lines = []
-        in_content = False
+	p = Popen(["awk", 'BEGIN{ORS=FS} $1=="#" {for(i=2;i<NR;i++) print $i;printf "\\n";}', fn], stdout=PIPE, text=True)
 
-        for line in f:
-            if title is None and re.match(r'^# ', line):
-                title = line[2:].strip()
-                in_content = True
-                continue
-            if in_content:
-                content_lines.append(line)
+	for title in p.stdout:
+		title = title.rstrip('\n')
+		if not title:
+			continue
 
-        if title is None:
-            print(f"Skipping {fn}: no title line starting with '# ' found.", file=stderr)
-            continue
+		if len(title) > 255:
+			print(f"Skipping {fn}: title too long ({len(title)} chars).", file=stderr)
+			continue
 
-        if len(title) > 255:
-            print(f"Skipping {fn}: title too long ({len(title)} chars).", file=stderr)
-            continue
+		out_path = Path("card") / ctype / f"{slugify(title)}.md"
 
-        out_path = Path("card") / ctype / f"{slugify(title)}.txt"
+		if out_path.exists():
+			print(f"Skipping {fn}: {out_path} already exists.", file=stderr)
+			continue
 
-        if out_path.exists():
-            print(f"Skipping {fn}: {out_path} already exists.", file=stderr)
-            continue
+		with open(out_path, 'w') as out_f:
+			out_f.write(template % (title, ''))
 
-        post = Post(
-            content=''.join(content_lines).strip(),
-            title=title,
-            layout='card.pug',
-            special=False,
-            xp=0
-        )
-
-        with open(out_path, 'w') as out_f:
-            frontmatter_dump(post, out_f)
-
-        print(f"Generated {out_path}")
+		print(f"Generated {out_path}")
