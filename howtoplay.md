@@ -11,6 +11,7 @@
 - Non-perpetual boons can be handed out whenever by the ST, during sesson time.
 - Perpetual boons are tied to Backgrounds.
 - Waylays have an associated point cost.
+- Special waylays have no point cost, and can be played once-per chronicle.
 
 # Playfield
 - The playfield consists of 3 areas
