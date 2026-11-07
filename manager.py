@@ -118,9 +118,10 @@ class App(tk.Tk):
 
 		self.f_txtsize = ttk.Spinbox(right, from_=-0xFF, to=0xFF, width=5)
 		self.f_ttlsize = ttk.Spinbox(right, from_=-0xFF, to=0xFF, width=5)
+		self.f_file = ttk.Entry(right, font="TkFixedFont")
 		for i, (lbl, w) in enumerate(zip(
-			("Title", "XP", "Txtsize", "Ttlsize"),
-			(self.f_title, self.f_xp, self.f_txtsize, self.f_ttlsize)
+			("Filename", "Title", "XP", "txtsize", "ttlsize"),
+			(self.f_file, self.f_title, self.f_xp, self.f_txtsize, self.f_ttlsize)
 		)):
 			ttk.Label(right, text=lbl).grid(row=i, column=0, sticky="w", padx=(0, 6))
 			w.grid(row=i, column=1, sticky="ew", pady=2)
@@ -179,6 +180,7 @@ class App(tk.Tk):
 		self.f_xp.delete(0, tk.END);     self.f_xp.insert(0, str(data.get("xp") or 0))
 		self.f_txtsize.delete(0, tk.END); self.f_txtsize.insert(0, str(data.get("txtsize") or 0))
 		self.f_ttlsize.delete(0, tk.END); self.f_ttlsize.insert(0, str(data.get("ttlsize") or 0))
+		self.f_file.delete(0, tk.END);   self.f_file.insert(0, slug)
 		self.f_img.delete(0, tk.END);    self.f_img.insert(0, data.get("img", "") or "")
 		self.v_special.set(bool(data.get("special", False)))
 		self.f_body.delete("1.0", tk.END)
@@ -207,16 +209,15 @@ class App(tk.Tk):
 		if col is None:
 			messagebox.showwarning("Nothing selected", "Select or create a card first.")
 			return
-		title = self.f_title.get().strip()
-		if not title:
-			messagebox.showwarning("Missing title", "Title is required.")
+		new_slug = self.f_file.get().strip()
+		if not new_slug:
+			messagebox.showwarning("Missing filename", "Filename is required.")
 			return
-		new_slug = slugify(title)
 		if new_slug != slug and (CARD_DIR / col / f"{new_slug}.md").exists():
 			messagebox.showwarning("Duplicate", f"A card named '{new_slug}' already exists.")
 			return
 		write_card(col, new_slug, {
-			"title":   title,
+			"title":   self.f_title.get().strip(),
 			"xp":      self.f_xp.get(),
 			"txtsize": self.f_txtsize.get(),
 			"ttlsize": self.f_ttlsize.get(),
