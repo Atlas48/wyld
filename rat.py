@@ -28,7 +28,7 @@ for i in argv[1:]:
 		exit(1)
 	if hw.h==120 and hw.w==168:
 		print(i,*hw,sep="\t")
-	elif hw.h*5>=hw.w*7:
-		print(i,*hw,'|',hw.w,(hw.w*5)//7,sep="\t")
+	elif hw.h*7>=hw.w*5:
+		print(i,*hw,'|',(hw.w*5)//7,hw.w,sep="\t")
 	else:
 		print(i,*hw,'|',hw.h,(hw.h*7)//5,sep="\t")
