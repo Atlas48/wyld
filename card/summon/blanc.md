@@ -5,4 +5,4 @@ img: blanc.png
 txtsize: 2
 ttlsize: 0
 ---
-Down to Clown with you anytime!
+Back, and about the sameish as ever!

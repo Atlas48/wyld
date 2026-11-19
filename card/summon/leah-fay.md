@@ -5,4 +5,5 @@ img: leah-fay.png
 txtsize: 2
 ttlsize: 0
 ---
-Now its your turn.
+She's totally on her redemption arc,
+totally kindnessmaxxing.
