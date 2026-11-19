@@ -1,7 +1,8 @@
 ---
 title: Horrible News
 special: true
-txtsize: 1
+txtsize: 0
 ttlsize: 1
 ---
-Ari has something to share with you.
+**Adds Story: For the Light has Faded Away**
+Ari has something she wants to tell everyone.
