@@ -10,8 +10,8 @@ for d in COLLECTIONS:
 			continue
 		cc=frontmatter_loads(i.read_text())
 		if 'img' not in cc.metadata:
-			print('X',i.relative_to(CARD_DIR.parent))
+			print('X',*i.relative_to(CARD_DIR).parts)
 		elif cc.metadata['img'] is None:
-			print('O',i.relative_to(CARD_DIR.parent))
+			print('O',*i.relative_to(CARD_DIR).parts)
 		else:
-			print('-',i.relative_to(CARD_DIR.parent))
+			print('-',*i.relative_to(CARD_DIR).parts)
