@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from sys import stderr, argv
 from collections import namedtuple
-from math import floor
 from PIL import Image, UnidentifiedImageError
 
 HeightWidth=namedtuple('HeightWidth',['h','w'])
@@ -26,9 +25,9 @@ for i in argv[1:]:
 		print("Somehow managed to get a ValueError. Exiting immediately.",file=stderr)
 		print(e,file=stderr)
 		exit(1)
-	if hw.h==120 and hw.w==168:
-		print(i,*hw,sep="\t")
-	elif hw.h*7>=hw.w*5:
-		print(i,*hw,'|',(hw.w*5)//7,hw.w,sep="\t")
+	if hw.w * 5 == hw.h * 7:
+		print(i, *hw, sep="\t")
+	elif hw.w * 5 > hw.h * 7:
+		print(i, *hw, '|', (hw.h * 7)//5, hw.h, sep="\t")
 	else:
-		print(i,*hw,'|',hw.h,(hw.h*7)//5,sep="\t")
+		print(i, *hw, '|', hw.w, (hw.w * 5)//7, sep="\t")
