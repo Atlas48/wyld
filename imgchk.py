@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from os.path import isfile
 from pathlib import Path
 from frontmatter import loads as frontmatter_loads
 from lib.const import *
@@ -13,5 +14,7 @@ for d in COLLECTIONS:
 			print('X',*i.relative_to(CARD_DIR).parts)
 		elif cc.metadata['img'] is None:
 			print('O',*i.relative_to(CARD_DIR).parts)
+		elif not isfile(cc.metadata['img']):
+			print('~',*i.relative_to(CARD_DIR).parts)
 		else:
 			print('-',*i.relative_to(CARD_DIR).parts)
