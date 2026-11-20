@@ -12,9 +12,9 @@ for d in COLLECTIONS:
 		cc=frontmatter_loads(i.read_text())
 		if 'img' not in cc.metadata:
 			print('X',*i.relative_to(CARD_DIR).parts)
-		elif cc.metadata['img'] is None:
+		elif cc.metadata['img'] is None or cc.metadata['img']=="":
 			print('O',*i.relative_to(CARD_DIR).parts)
-		elif not isfile(cc.metadata['img']):
+		elif not isfile("img/"+cc.metadata['img']):
 			print('~',*i.relative_to(CARD_DIR).parts)
 		else:
 			print('-',*i.relative_to(CARD_DIR).parts)
