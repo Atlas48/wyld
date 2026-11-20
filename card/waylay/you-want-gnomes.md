@@ -1,6 +1,7 @@
 ---
 title: You Want Gnomes.
 special: false
+img: you-want-gnomes.jpg
 xp: 2
 txtsize: 0
 ttlsize: 0
