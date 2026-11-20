@@ -3,7 +3,7 @@ from sys import stderr, argv
 from collections import namedtuple
 from PIL import Image, UnidentifiedImageError
 
-HeightWidth=namedtuple('HeightWidth',['h','w'])
+HeightWidth=namedtuple('HeightWidth',['w','h'])
 
 if len(argv)<2:
 	print("Nothing to process.",file=stderr)
@@ -14,7 +14,7 @@ for i in argv[1:]:
 		with Image.open(i) as im:
 			#aww yeah name that tuple.
 			#its size B)
-			hw=HeightWidth(*im.size[::-1])
+			hw=HeightWidth(*im.size)
 	except FileNotFoundError:
 		print(f"Listed file, {i}, does not exist.",file=stderr)
 		continue
