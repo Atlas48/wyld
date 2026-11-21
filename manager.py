@@ -5,8 +5,7 @@ import importlib.util
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
-import frontmatter
-import yaml
+import tomlkit
 from PIL import Image, ImageTk
 from lib.const import CARD_DIR, COLLECTIONS, CardType
 from lib.func import slugify
@@ -23,45 +22,36 @@ def _load_scripts() -> dict:
 	return mods
 
 def list_cards(collection: str) -> list[str]:
-	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.md") if not p.stem.startswith("test"))
+	return sorted(p.stem for p in (CARD_DIR / collection).glob("*.toml") if not p.stem.startswith("test"))
 
-def read_card(collection: str, slug: str) -> dict:
-	text = (CARD_DIR / collection / f"{slug}.md").read_text(encoding="utf-8")
-	parts = text.split("---\n", 2)
-	if len(parts) < 3:
-		return {"title": slug, "content": text}
-	front = yaml.safe_load(parts[1]) or {}
-	front["content"] = parts[2].strip()
-	return front
+def read_card(collection: str, slug: str) -> tomlkit.TOMLDocument:
+	return tomlkit.parse((CARD_DIR / collection / f"{slug}.toml").read_text(encoding="utf-8"))
 
 def write_card(collection: str, slug: str, data: dict):
-	front = {
-		"title":   data.get("title", ""),
-		"special": bool(data.get("special", False)),
-	}
+	doc = tomlkit.document()
+	doc["title"] = data.get("title", "")
+	doc["special"] = bool(data.get("special", False))
 	if data.get("img"):
-		front["img"] = data["img"]
+		doc["img"] = data["img"]
 	try:
 		xp = int(data.get("xp") or 0)
 		if xp:
-			front["xp"] = xp
+			doc["xp"] = xp
 	except (ValueError, TypeError):
 		pass
 	try:
-		front["txtsize"] = int(data.get("txtsize") or 0)
+		doc["txtsize"] = int(data.get("txtsize") or 0)
 	except (ValueError, TypeError):
-		front["txtsize"] = 0
+		doc["txtsize"] = 0
 	try:
-		front["ttlsize"] = int(data.get("ttlsize") or 0)
+		doc["ttlsize"] = int(data.get("ttlsize") or 0)
 	except (ValueError, TypeError):
-		front["ttlsize"] = 0
-	(CARD_DIR / collection / f"{slug}.md").write_text(
-		f"---\n{yaml.dump(front, default_flow_style=False, allow_unicode=True, sort_keys=False)}---\n{data.get('content', '').strip()}\n",
-		encoding="utf-8",
-	)
+		doc["ttlsize"] = 0
+	doc["content"] = tomlkit.string(data.get("content", "").strip(), multiline=True)
+	(CARD_DIR / collection / f"{slug}.toml").write_text(tomlkit.dumps(doc), encoding="utf-8")
 
 def delete_card(collection: str, slug: str):
-	(CARD_DIR / collection / f"{slug}.md").unlink()
+	(CARD_DIR / collection / f"{slug}.toml").unlink()
 
 
 class App(tk.Tk):
@@ -213,7 +203,7 @@ class App(tk.Tk):
 		if not new_slug:
 			messagebox.showwarning("Missing filename", "Filename is required.")
 			return
-		if new_slug != slug and (CARD_DIR / col / f"{new_slug}.md").exists():
+		if new_slug != slug and (CARD_DIR / col / f"{new_slug}.toml").exists():
 			messagebox.showwarning("Duplicate", f"A card named '{new_slug}' already exists.")
 			return
 		write_card(col, new_slug, {
@@ -296,7 +286,7 @@ class App(tk.Tk):
 					(col, s)
 					for col in COLLECTIONS
 					for s in list_cards(col)
-					if query_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
+					if query_fn(read_card(col, s), CardType[col.capitalize()])
 				]
 			except Exception as e:
 				messagebox.showerror("Query failed", str(e))
@@ -309,8 +299,7 @@ class App(tk.Tk):
 			try:
 				change_fn = resolve(c_pick, c_text, changers, "change")
 				for col, s in matches:
-					post = change_fn(frontmatter.load(CARD_DIR / col / f"{s}.md"), CardType[col.capitalize()])
-					write_card(col, s, dict(post.metadata, content=post.content))
+					write_card(col, s, change_fn(read_card(col, s), CardType[col.capitalize()]))
 			except Exception as e:
 				messagebox.showerror("Change failed", str(e))
 				return
