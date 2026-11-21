@@ -19,7 +19,7 @@ from lib.func import slugify
 import tomlkit
 
 for fn in files:
-	p = Popen(["awk", 'BEGIN{ORS=FS} $1=="#" {for(i=2;i<=NF;i++) print $i;printf "\\n";}', fn], stdout=PIPE, text=True)
+	p = Popen(["awk", 'BEGIN{ORS=FS} $1=="#"&&NF>1 {for(i=2;i<=NF;i++) print $i;printf "\\n";}', fn], stdout=PIPE, text=True)
 
 	for title in p.stdout:
 		title = title.strip()
