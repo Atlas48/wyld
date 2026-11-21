@@ -193,3 +193,4 @@ __marimo__/
 _site
 process.py
 hash.pkl
+all.*
