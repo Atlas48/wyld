@@ -299,7 +299,7 @@ class App(tk.Tk):
 			try:
 				change_fn = resolve(c_pick, c_text, changers, "change")
 				for col, s in matches:
-					write_card(col, s, change_fn(read_card(col, s), CardType[col.capitalize()]))
+					(CARD_DIR / col / f"{s}.toml").write_text(tomlkit.dumps(change_fn(read_card(col, s), CardType[col.capitalize()])), encoding="utf-8")
 			except Exception as e:
 				messagebox.showerror("Change failed", str(e))
 				return

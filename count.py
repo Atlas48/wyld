@@ -15,7 +15,7 @@ coll=map(lambda i: CARD_DIR/i,COLLECTIONS)
 for d in coll:
 	c=0
 	for i in d.iterdir():
-		if i.name.startswith('test') or not i.name.endswith('.md'):
+		if i.name.startswith('test') or not i.name.endswith('.toml'):
 			continue
 		c+=1
 	if d.name in total:
