@@ -4,7 +4,9 @@ for d in card/*; do
 		if [[ $i != *.toml ]]
 			 then continue
 		fi
-		echo $i
+		if [ "$1" == "-v" ]
+			then echo $i
+		fi
 		echo "[[card]]" >> all.toml
 		echo "type=\"$(basename $d)\"" >> all.toml
 		cat $i >> all.toml
