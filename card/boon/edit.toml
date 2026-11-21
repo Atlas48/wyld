@@ -1,0 +1,6 @@
+title = "Edit"
+special = false
+txtsize = 0
+ttlsize = 0
+content = """*During play,*
+The player may rewrite a scene of their choosing."""

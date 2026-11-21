@@ -1,8 +1,0 @@
----
-title: Disadvantage
-special: false
-xp: 2
-txtsize: 0
-ttlsize: -2
----
-The player may reroll a single check, and will take the higher of the two checks.

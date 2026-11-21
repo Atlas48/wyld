@@ -1,9 +1,0 @@
----
-title: Goose
-special: false
-img: goose.jpg
-xp: 2
-txtsize: 0
-ttlsize: 0
----
-[Honk.](https://www.youtube.com/watch?v=E-8Ad6s10q4)

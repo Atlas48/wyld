@@ -1,0 +1,7 @@
+title = "Lucky Miss"
+special = false
+img = "lucky-miss.png"
+txtsize = 0
+ttlsize = 0
+content = """*On play,*
+Negate one single source of damage entirely."""

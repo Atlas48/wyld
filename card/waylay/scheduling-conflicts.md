@@ -1,9 +1,0 @@
----
-title: Scheduling Conflicts
-special: false
-img: scheduling-conflicts.png
-xp: 2
-txtsize: 0
-ttlsize: 0
----
-Return one summon to hand.
