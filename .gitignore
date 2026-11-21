@@ -146,3 +146,4 @@ _site
 process.py
 hash.pkl
 all.*
+*[1-4].md
