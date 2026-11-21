@@ -29,7 +29,7 @@ for fn in files:
 		if len(title) > 255:
 			print(f"Skipping {fn}: title too long ({len(title)} chars).", file=stderr)
 			continue
-		out_path = Path("card") / ctype / f"{slugify(title)}.md"
+		out_path = Path("card") / ctype / f"{slugify(title)}.toml"
 		if out_path.exists():
 			print(f"Skipping {fn}: {out_path} already exists.", file=stderr)
 			continue
