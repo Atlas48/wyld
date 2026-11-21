@@ -1,7 +1,7 @@
 title = "Test Story"
-img = "../img/test.png"
 xp = 1
-special = true
 txtsize = 0
 ttlsize = 0
+special = true
+img = "../img/test.png"
 content = """Test story card."""

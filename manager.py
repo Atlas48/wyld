@@ -30,23 +30,14 @@ def read_card(collection: str, slug: str) -> tomlkit.TOMLDocument:
 def write_card(collection: str, slug: str, data: dict):
 	doc = tomlkit.document()
 	doc["title"] = data.get("title", "")
+	for k in ("xp", "txtsize", "ttlsize"):
+		try:
+			doc[k] = int(data.get(k) or 0)
+		except (ValueError, TypeError):
+			doc[k] = 0
 	doc["special"] = bool(data.get("special", False))
 	if data.get("img"):
 		doc["img"] = data["img"]
-	try:
-		xp = int(data.get("xp") or 0)
-		if xp:
-			doc["xp"] = xp
-	except (ValueError, TypeError):
-		pass
-	try:
-		doc["txtsize"] = int(data.get("txtsize") or 0)
-	except (ValueError, TypeError):
-		doc["txtsize"] = 0
-	try:
-		doc["ttlsize"] = int(data.get("ttlsize") or 0)
-	except (ValueError, TypeError):
-		doc["ttlsize"] = 0
 	doc["content"] = tomlkit.string(data.get("content", "").strip(), multiline=True)
 	(CARD_DIR / collection / f"{slug}.toml").write_text(tomlkit.dumps(doc), encoding="utf-8")
 

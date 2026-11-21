@@ -1,7 +1,8 @@
 title = "Lucy Arkwright"
-special = false
-img = "lucy-arkwright.png"
+xp = 0
 txtsize = 2
 ttlsize = 0
+special = false
+img = "lucy-arkwright.png"
 content = """Don't accidentally step on her!
 She'll explode!"""

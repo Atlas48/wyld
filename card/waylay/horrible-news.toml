@@ -1,6 +1,7 @@
 title = "Horrible News"
-special = true
+xp = 0
 txtsize = 0
 ttlsize = 1
+special = true
 content = """**Adds Story: For the Light has Faded Away**
 Ari has something she wants to tell everyone."""

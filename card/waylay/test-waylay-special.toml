@@ -1,6 +1,7 @@
 title = "Test Waylay"
-img = "../img/test.png"
-special = true
+xp = 0
 txtsize = 0
 ttlsize = 0
+special = true
+img = "../img/test.png"
 content = """Test waylay card."""

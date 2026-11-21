@@ -1,7 +1,8 @@
 title = "Portent"
-special = false
-img = "portent.png"
+xp = 0
 txtsize = -3
 ttlsize = 0
+special = false
+img = "portent.png"
 content = """Roll two d10s and record the numbers rolled.
 You can replace any check with either of these numbers, once."""

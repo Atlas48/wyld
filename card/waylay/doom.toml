@@ -1,6 +1,6 @@
 title = "doom"
-special = false
 xp = 4
 txtsize = 0
 ttlsize = 1
+special = false
 content = """A check may automatically fail during this Story."""

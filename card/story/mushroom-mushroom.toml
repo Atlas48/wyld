@@ -1,7 +1,7 @@
 title = "Mushroom, Mushroom!"
-special = false
-img = "mushroom-mushroom.jpg"
 xp = 1
 txtsize = 2
 ttlsize = -4
+special = false
+img = "mushroom-mushroom.jpg"
 content = """Ari suggests going mushrooming!"""

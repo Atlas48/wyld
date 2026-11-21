@@ -1,7 +1,8 @@
 title = "Pascoe"
-special = false
-img = "pascoe.png"
+xp = 0
 txtsize = 2
 ttlsize = 0
+special = false
+img = "pascoe.png"
 content = """They're silent, but not deadly.
 They're actually quite friendly!"""

@@ -1,5 +1,6 @@
 title = "Capeman"
-special = true
+xp = 0
 txtsize = 0
 ttlsize = 0
+special = true
 content = """*Don't worry, citizen, I'm here!!*"""

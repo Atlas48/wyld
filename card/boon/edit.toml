@@ -1,6 +1,7 @@
 title = "Edit"
-special = false
+xp = 0
 txtsize = 0
 ttlsize = 0
+special = false
 content = """*During play,*
 The player may rewrite a scene of their choosing."""
