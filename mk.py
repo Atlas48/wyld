@@ -3,7 +3,7 @@
 import argparse
 from copy import deepcopy
 from pickle import dump as pickle_dump
-from frontmatter import loads as frontmatter_loads
+from tomlkit import loads as frontmatter_loads
 from lib.const import *
 from lib.jenv import templ
 from lib.incr import *
@@ -36,7 +36,7 @@ cardsame=templsame('card.svg.j2',fhash)
 basesame=templsame('basic.html.j2',fhash)
 
 print('== Checking files...')
-for i in root.glob('*.md'):
+for i in root.glob('*.toml'):
 	ch=qxh(i.read_bytes())
 	if not arg.all and basesame and fhash.get(str(i))==ch:
 		continue
@@ -47,20 +47,20 @@ for i in root.glob('*.md'):
 for d in coll:
 	(build/d).mkdir(exist_ok=True,parents=True)
 	for i in d.iterdir():
-		if not i.name.endswith('.md'):
+		if not i.name.endswith('.toml'):
 			continue
 		ch=qxh(i.read_bytes())
 		if not arg.all and cardsame and fhash.get(str(i))==ch:
 			continue #as well
 		dest=build/d/i.with_suffix('.svg').name
 		cc=frontmatter_loads(i.read_text())
-		if 'img' in cc.metadata and cc.metadata['img'] is not None and ('datauri' not in cc.metadata or cc.metadata['datauri'] is None):
-			cc.metadata['datauri']=datauri(cc.metadata['img'])
-		if 'txtsize' not in cc.metadata or cc.metadata['txtsize'] is None:
-			cc.metadata['txtsize']=0
-		if 'ttlsize' not in cc.metadata or cc.metadata['ttlsize'] is None:
-			cc.metadata['ttlsize']=0
-		dest.write_text(templ.card.render(**cc.metadata,content=cc.content,type=CardType[d.name.capitalize()],CardType=CardType))
+		if 'img' in cc and cc['img'] is not None and ('datauri' not in cc or cc['datauri'] is None):
+			cc['datauri']=datauri(cc['img'])
+		if 'txtsize' not in cc or cc['txtsize'] is None:
+			cc['txtsize']=0
+		if 'ttlsize' not in cc or cc['ttlsize'] is None:
+			cc['ttlsize']=0
+		dest.write_text(templ.card.render(**cc,type=CardType[d.name.capitalize()],CardType=CardType))
 		fhash[str(i)]=ch
 		print(i.name,dest.name,sep=" -> ")
 if not setup or shash!=fhash:
