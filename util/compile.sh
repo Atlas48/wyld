@@ -1,4 +1,7 @@
 #!/bin/bash
+if test -f all.toml
+	then rm all.toml
+fi
 for d in card/*; do
 	for i in $d/*; do
 		if [[ $i != *.toml ]]
