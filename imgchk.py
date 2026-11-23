@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#see also: util/imgcount.awk
 from os.path import isfile
 from pathlib import Path
 from tomlkit import loads as frontmatter_loads
